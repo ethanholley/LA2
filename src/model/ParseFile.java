@@ -14,9 +14,10 @@ public class ParseFile {
 
 	private MusicStore musicStore;
 
-	public ParseFile(Path file) {
+	public ParseFile(String file) {
 		this.musicStore = new MusicStore();
-		goThroughFolder(file);
+		Path filePath = Paths.get(file);
+		goThroughFolder(filePath);
 	}
 
 	public MusicStore getMusicStore() {
@@ -91,17 +92,16 @@ public class ParseFile {
 		}
 
 		Album album = new Album(albumName, artist, songList);
-		System.out.println(songList.toString());
+//		System.out.println(songList.toString());
 
 		// TODO: Uncomment and implement methods in MusicStore
-//		this.musicStore.addAlbum(albumName);
+//		this.musicStore.addAlbum(album);
 //		this.musicStore.addArtist(artist);
-//		this.musicStore.addSongList(new ArrayList<>(songList));
+//		this.musicStore.addSongList(new ArrayList<>(songList)); // copy of ArrayList
 	}
 
-	public static void main(String[] args) {
-		Path filePath = Paths.get("/Users/chancekrueger/Desktop/albums");
-		ParseFile pf = new ParseFile(filePath);
-	}
+//	public static void main(String[] args) {
+//		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+//	}
 
 }
