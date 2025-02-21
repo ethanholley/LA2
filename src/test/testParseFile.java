@@ -16,7 +16,7 @@ import model.ParseFile;
 
 public class testParseFile {
 
-	private ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+	private ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 
 	@Test
 	void testConstructor() {
@@ -36,7 +36,7 @@ public class testParseFile {
 		// Invoke the method and ensure no exception is thrown (it should be caught)
 		assertDoesNotThrow(() -> method.invoke(pf, invalidPath));
 	}
-
+	
 	@Test
 	void testFailFileNotFoundException() throws Exception {
 		// Create a reference to a non-existent file

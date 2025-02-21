@@ -81,7 +81,7 @@ public class ParseFile {
 					firstLine = false;
 				} else {
 					// Add song to the list with extracted artist name
-					songList.add(new Song(line, artist));
+					songList.add(new Song(line, artist, albumName));
 				}
 			}
 
@@ -92,16 +92,11 @@ public class ParseFile {
 		}
 
 		Album album = new Album(albumName, artist, songList);
-//		System.out.println(songList.toString());
+		System.out.println(songList.toString());
 
 		// TODO: Uncomment and implement methods in MusicStore
-//		this.musicStore.addAlbum(album);
+		this.musicStore.addAlbum(album);
+		this.musicStore.addSong(new ArrayList<>(songList));
 //		this.musicStore.addArtist(artist);
-//		this.musicStore.addSongList(new ArrayList<>(songList)); // copy of ArrayList
 	}
-
-//	public static void main(String[] args) {
-//		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
-//	}
-
 }
