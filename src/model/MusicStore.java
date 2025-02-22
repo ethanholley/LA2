@@ -34,19 +34,19 @@ public class MusicStore {
 		allAlbumsList.add(album);
 	}
 	
-	public String searchSongbyTitle(String title) {
+	public Song searchSongbyTitle(String title) {
 		for (Song song: allSongsList) {
 			if (song.getTitle() == title) {
-				return song.getTitle() + ", By: " + song.getArtist() + ", Album: " + song.getAlbum();
+				return new Song(song); // return song object
 			}
 		}
 		return null;
 	}
 	
-	public String searchSongbyArtist(String artist) {
+	public Song searchSongbyArtist(String artist) {
 		for (Song song: allSongsList) {
-			if (song.getArtist() == artist) {
-				return song.getTitle() + ", By: " + song.getArtist() + ", Album: " + song.getAlbum();
+			if (song.getArtist() == artist) { 
+				return new Song(song);
 			}
 		}
 		return null;

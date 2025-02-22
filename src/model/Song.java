@@ -52,6 +52,12 @@ public class Song {
 	public boolean isFavorite() {
 		return this.isFavorite;
 	}
+	
+	public void checkRating() { // checks if the song is rated a five and marks it as a favorite
+		if (this.rating == rating.FIVE){
+			setFavorite();
+		}
+	}
 
 	@Override
 	public String toString() {
