@@ -1,13 +1,12 @@
 package model;
 
-// SONG CLASS
 public class Song {
 	private String title;
 	private String artist;
 	private Rating rating;
 	private String album;
 	private boolean isFavorite;
-	
+
 	// Regular Constructor
 	public Song(String title, String artist, String album) {
 		this.title = title;
@@ -16,8 +15,7 @@ public class Song {
 		this.rating = rating.ZERO;
 		this.isFavorite = false;
 	}
-	
-	
+
 	// COPY CONSTRUCTOR
 	public Song(Song other) {
 		this.title = other.title;
@@ -26,31 +24,35 @@ public class Song {
 		this.rating = other.rating;
 		this.isFavorite = other.isFavorite;
 	}
-	
+
 	public String getTitle() {
 		return this.title;
 	}
-	
+
 	public String getArtist() {
 		return this.artist;
 	}
-	
+
 	public String getAlbum() {
 		return this.album;
 	}
-	
+
 	public Rating getRating() {
 		return rating;
 	}
-	
+
 	public void setRating(Rating rating) {
 		this.rating = rating;
 	}
-	
+
 	public void setFavorite() {
 		isFavorite = true;
 	}
-	
+
+	public boolean isFavorite() {
+		return this.isFavorite;
+	}
+
 	@Override
 	public String toString() {
 

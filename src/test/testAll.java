@@ -1,10 +1,14 @@
 package test;
 
-public class testAll {
+import org.junit.jupiter.api.Test;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+class testAll {
 
+	@Test
+	void testAllCases() throws Exception {
+		testRating rating = new testRating();
+		testParseFile pf = new testParseFile();
+		testSong song = new testSong();
 	}
 
 }
