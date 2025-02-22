@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -13,26 +14,18 @@ import org.junit.jupiter.api.Test;
 import model.MusicStore;
 import model.ParseFile;
 
-class testParseFile {
+public class testParseFile {
 
-	// /Users/chancekrueger/Desktop/albums
-	// /Users/ethanjholly/Desktop/LA 1/albums
-	private ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
-
-	public testParseFile() throws Exception {
-		testConstructor();
-		testFailIOException();
-		testFailFileNotFoundException();
-	}
+	private ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 
 	@Test
-	private void testConstructor() {
+	void testConstructor() {
 
 		assertTrue(this.pf.getMusicStore().getClass() == new MusicStore().getClass());
 	}
 
 	@Test
-	private void testFailIOException() throws Exception {
+	void testFailIOException() throws Exception {
 		// Create an invalid directory path (e.g., non-existent or restricted)
 		Path invalidPath = Paths.get("/this/path/does/not/exist");
 
@@ -43,9 +36,9 @@ class testParseFile {
 		// Invoke the method and ensure no exception is thrown (it should be caught)
 		assertDoesNotThrow(() -> method.invoke(pf, invalidPath));
 	}
-
+	
 	@Test
-	private void testFailFileNotFoundException() throws Exception {
+	void testFailFileNotFoundException() throws Exception {
 		// Create a reference to a non-existent file
 		File missingFile = new File("doesNotExist.txt");
 
@@ -56,4 +49,6 @@ class testParseFile {
 		// Invoke the method and ensure no exception is thrown (it should be caught)
 		assertDoesNotThrow(() -> method.invoke(pf, missingFile));
 	}
+	// /Users/chancekrueger/Desktop/albums
+	// /Users/ethanjholly/Desktop/LA 1/albums
 }

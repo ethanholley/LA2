@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+// MUSIC STORE COMMENT
+
 public class MusicStore {
 	ArrayList<Song> allSongsList;
 	ArrayList<Album> allAlbumsList;
