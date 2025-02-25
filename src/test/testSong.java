@@ -23,6 +23,8 @@ class testSong {
 		testSetRating();
 		testSetFavorite();
 		testToString();
+		testCheckRating();
+		testEquals();
 	}
 
 	@Test
@@ -89,8 +91,39 @@ class testSong {
 	}
 
 	@Test
-	void testCheckRating() {
+	private void testCheckRating() {
+		this.song.setRating(Rating.FIVE);
 		this.song.checkRating();
+		assertTrue(song.isFavorite());
+	}
+
+	@Test
+	private void testEquals() {
+//		Song song = new Song("DNA", "Kendrick Lamar", "Damn.");
+		Song songCopyTitle = new Song("DNA", "Hello", "World");
+		Song songCopyArtist = new Song("DNA", "Kendrick Lamar", "World");
+		Song songCopyAlbumn = new Song("DNA", "Kendrick Lamar", "Damn.");
+		
+		assertFalse(song.equals(null));
+		assertTrue(song.equals(song));
+		assertFalse(song.equals(Rating.FIVE));
+		
+		songCopyAlbumn.setRating(rating.FOUR);
+		assertFalse(song.equals(songCopyAlbumn));
+		
+		song.setRating(rating.ZERO);
+		songCopyAlbumn.setRating(rating.FIVE);
+		assertFalse(song.equals(songCopyAlbumn));
+
+		assertFalse(song.equals(songCopyAlbumn));
+		assertFalse(song.equals(songCopyArtist));
+		assertFalse(song.equals(songCopyTitle));
+		
+		song.setRating(rating.FIVE);
+		
+		assertTrue(song.equals(songCopyAlbumn));
+
+
 	}
 
 }

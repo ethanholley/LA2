@@ -17,12 +17,12 @@ public class MusicStore {
 		this.allSongsList = copy.allSongsList;
 	}
 
-	//WHY ISNT THIS FIXED?
+	// WHY ISNT THIS FIXED?
 	public void addSong(ArrayList<Song> allSongs) {
 		for (Song song : allSongs) {
 			allSongsList.add(new Song(song));
 		}
-	} 
+	}
 
 	public void addAlbum(String albumName, String artist, ArrayList<Song> songList) {
 		allAlbumsList.add(new Album(albumName, artist, songList));

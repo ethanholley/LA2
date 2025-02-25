@@ -57,8 +57,11 @@ class testMusicStore {
 	private void testAddAlbum() {
 		Album kendrickAlbum = kendricksAlbum();
 
-		ms.addAlbum(kendrickAlbum);
+		Album kensAlbum = kendricksAlbum();
 
+		ms.addSong(kensAlbum.getSongList());
+
+		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 		Album copyKen = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
 
 		assertTrue(copyKen.equals(kendrickAlbum));
@@ -77,8 +80,11 @@ class testMusicStore {
 
 	@Test
 	private void testSearchSongbyArtist() {
-		ms.addAlbum(kendricksAlbum());
+		Album kensAlbum = kendricksAlbum();
 
+		ms.addSong(kensAlbum.getSongList());
+
+		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 		Song dnaSong = ms.searchSongbyArtist("Kendrick Lamar", "DNA.");
 
 		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.");
@@ -92,8 +98,11 @@ class testMusicStore {
 
 	@Test
 	private void testSearchAlbumTitle() {
-		ms.addAlbum(kendricksAlbum());
+		Album kensAlbum = kendricksAlbum();
 
+		ms.addSong(kensAlbum.getSongList());
+
+		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 		Album albumCopy = ms.searchAlbumTitle("Damn.");
 
 		assertTrue(albumDamn.equals(albumCopy));
@@ -105,10 +114,15 @@ class testMusicStore {
 
 	@Test
 	private void testSearchAlbumArtist() {
-		ms.addAlbum(kendricksAlbum());
+		
+		Album kensAlbum = kendricksAlbum();
+
+		ms.addSong(kensAlbum.getSongList());
+
+		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 
 		Album albumCopy = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
-
+		
 		assertTrue(albumDamn.equals(albumCopy));
 
 		Album albumNoName = ms.searchAlbumArtist("Kendrick Lamar", "Damn");

@@ -82,11 +82,4 @@ public class Song {
 					&& this.isFavorite == ((Song) o).isFavorite;
 		}
 	}
-
-//	this.title = title;
-//	this.artist = artist;
-//	this.album = album;
-//	this.rating = rating.ZERO;
-//	this.isFavorite = false;
-
 }
