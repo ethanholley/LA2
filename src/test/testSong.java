@@ -90,7 +90,7 @@ class testSong {
 
 	@Test
 	void testCheckRating() {
-//		this.song
+		this.song.checkRating();
 	}
 
 }
