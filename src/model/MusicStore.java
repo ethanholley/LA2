@@ -23,8 +23,8 @@ public class MusicStore {
 		}
 	}
 
-	public void addAlbum(Album album) {
-		allAlbumsList.add(album);
+	public void addAlbum(String albumName, String artist, ArrayList<Song> songList) {
+		allAlbumsList.add(new Album(albumName, artist, songList));
 	}
 
 	public Song searchSongbyTitle(String title) {

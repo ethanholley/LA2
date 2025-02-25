@@ -88,4 +88,9 @@ class testSong {
 		song.toString().equals("DNA Kendrick Lamar");
 	}
 
+	@Test
+	void testCheckRating() {
+//		this.song
+	}
+
 }

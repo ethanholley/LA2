@@ -89,11 +89,8 @@ public class ParseFile {
 			e.printStackTrace();
 		}
 
-		Album album = new Album(albumName, artist, songList);
-//		System.out.println(songList.toString());
-
 		// TODO: Uncomment and implement methods in MusicStore
-		this.musicStore.addAlbum(album);
+		this.musicStore.addAlbum(albumName, artist, new ArrayList<>(songList));
 		this.musicStore.addSong(new ArrayList<>(songList));
 //		this.musicStore.addArtist(artist);
 	}
