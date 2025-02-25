@@ -53,8 +53,6 @@ public class ParseFile {
 	 * contain song titles.
 	 *
 	 * @param filePath The file representing an album to be processed.
-	 * 
-	 *
 	 */
 	private void addSongToAlbum(File filePath) {
 
@@ -92,7 +90,7 @@ public class ParseFile {
 		}
 
 		Album album = new Album(albumName, artist, songList);
-		System.out.println(songList.toString());
+//		System.out.println(songList.toString());
 
 		// TODO: Uncomment and implement methods in MusicStore
 		this.musicStore.addAlbum(album);

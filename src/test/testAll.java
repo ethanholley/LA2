@@ -9,6 +9,7 @@ class testAll {
 		testRating rating = new testRating();
 		testParseFile pf = new testParseFile();
 		testSong song = new testSong();
+		testMusicStore ms = new testMusicStore();
 	}
 
 }

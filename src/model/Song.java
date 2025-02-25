@@ -1,13 +1,12 @@
 package model;
 
-// SONG CLASS
 public class Song {
 	private String title;
 	private String artist;
 	private Rating rating;
 	private String album;
 	private boolean isFavorite;
-	
+
 	// Regular Constructor
 	public Song(String title, String artist, String album) {
 		this.title = title;
@@ -16,8 +15,7 @@ public class Song {
 		this.rating = rating.ZERO;
 		this.isFavorite = false;
 	}
-	
-	
+
 	// COPY CONSTRUCTOR
 	public Song(Song other) {
 		this.title = other.title;
@@ -26,40 +24,69 @@ public class Song {
 		this.rating = other.rating;
 		this.isFavorite = other.isFavorite;
 	}
-	
+
 	public String getTitle() {
 		return this.title;
 	}
-	
+
 	public String getArtist() {
 		return this.artist;
 	}
-	
+
 	public String getAlbum() {
 		return this.album;
 	}
-	
+
 	public Rating getRating() {
 		return rating;
 	}
-	
+
 	public void setRating(Rating rating) {
 		this.rating = rating;
+		checkRating();
 	}
-	
+
 	public void setFavorite() {
 		isFavorite = true;
 	}
-	
+
+	public boolean isFavorite() {
+		return this.isFavorite;
+	}
+
+	public void checkRating() { // checks if the song is rated a five and marks it as a favorite
+		if (this.rating == rating.FIVE) {
+			setFavorite();
+		}
+	}
+
 	@Override
 	public String toString() {
 
 		return title + " " + artist;
 
 	}
-	
-	public boolean isFavorite() {
-		return this.isFavorite;
+
+	// NEED TO TEST THIS IN ALBUM TEST
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		else if (o == this)
+			return true;
+		else if (o.getClass() != getClass())
+			return false;
+		else {
+			return this.title.equals(((Song) o).title) && this.artist.equals(((Song) o).artist)
+					&& this.album.equals(((Song) o).album) && this.rating.equals(((Song) o).rating)
+					&& this.isFavorite == ((Song) o).isFavorite;
+		}
 	}
+
+//	this.title = title;
+//	this.artist = artist;
+//	this.album = album;
+//	this.rating = rating.ZERO;
+//	this.isFavorite = false;
 
 }

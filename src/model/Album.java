@@ -42,4 +42,19 @@ public class Album {
 		return copy;
 	}
 
+	// NEED TO TEST THIS IN ALBUM TEST
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+			return false;
+		else if (o == this)
+			return true;
+		else if (o.getClass() != getClass())
+			return false;
+		else {
+			return this.album.equals(((Album) o).getAlbumName()) && this.artist.equals(((Album) o).getArtist())
+					&& this.songList.equals(((Album) o).getSongList());
+		}
+	}
+
 }
