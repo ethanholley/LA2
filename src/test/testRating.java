@@ -6,12 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import model.Rating;
 
-class testRating {
-
-	public testRating() {
-		testGetRating();
-		testIsEquals();
-	}
+public class testRating {
 
 	Rating rateZero = Rating.ZERO;
 	Rating rateOne = Rating.ONE;
@@ -21,7 +16,7 @@ class testRating {
 	Rating rateFive = Rating.FIVE;
 
 	@Test
-	private void testGetRating() {
+	void testGetRating() {
 
 		assertTrue(rateZero.getRating() == 0);
 		assertTrue(rateOne.getRating() == 1);
@@ -34,7 +29,7 @@ class testRating {
 
 	// STILL NEED 1 MORE BRANCH, I THINK SINCE ITS AN ENUM WE CAN'T GET IT
 	@Test
-	private void testIsEquals() {
+	void testIsEquals() {
 		assertFalse(rateZero.isEquals(null));
 		assertTrue(rateOne.isEquals(rateOne));
 

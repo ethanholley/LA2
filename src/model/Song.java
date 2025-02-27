@@ -55,7 +55,7 @@ public class Song {
 	}
 
 	public void checkRating() { // checks if the song is rated a five and marks it as a favorite
-		if (this.rating == rating.FIVE) {
+		if (this.rating == Rating.FIVE) {
 			setFavorite();
 		}
 	}

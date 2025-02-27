@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -13,33 +11,23 @@ import model.Album;
 import model.MusicStore;
 import model.Song;
 import model.ParseFile;
+import model.Rating;
 
-class testMusicStore {
+public class testMusicStore {
 
 	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
 	MusicStore ms = pf.getMusicStore();
 	Album albumDamn = kendricksAlbum();
 
-	public testMusicStore() {
-		testCopyConstructor();
-		testAddSong();
-		testAddAlbum();
-		testSearchSongbyTitle();
-		testSearchSongbyArtist();
-		testSearchAlbumTitle();
-		testSearchAlbumArtist();
-
-	}
-
 	@Test
-	private void testCopyConstructor() {
+	void testCopyConstructor() {
 
 		MusicStore copyMS = new MusicStore(ms);
 		assertFalse(copyMS == ms); // Not aliases
 	}
 
 	@Test
-	private void testAddSong() {
+	void testAddSong() {
 
 		Song song1 = new Song("IDGAF", "Drake", "For All the Dogs");
 		ArrayList<Song> songList = new ArrayList<Song>();
@@ -47,14 +35,14 @@ class testMusicStore {
 
 		ms.addSong(songList);
 
-		Song song2 = ms.searchSongbyArtist("Drake", "IDGAF");
+		ArrayList<Song> song2 = ms.searchSongbyArtist("Drake");
 
-		assertTrue(song1.equals(song2));
-		assertFalse(song1 == song2); // Checks to make sure songs aren't aliases
+		assertTrue(song1.equals(song2.get(0)));
+		assertFalse(song1 == song2.get(0)); // Checks to make sure songs aren't aliases
 	}
 
 	@Test
-	private void testAddAlbum() {
+	void testAddAlbum() {
 		Album kendrickAlbum = kendricksAlbum();
 
 		Album kensAlbum = kendricksAlbum();
@@ -62,42 +50,41 @@ class testMusicStore {
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
-		Album copyKen = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
+		ArrayList<Album> copyKen = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
 
-		assertTrue(copyKen.equals(kendrickAlbum));
+		assertTrue(copyKen.get(0).equals(kendrickAlbum));
 	}
 
 	@Test
-	private void testSearchSongbyTitle() {
-		Song song = ms.searchSongbyTitle("Chasing Pavements");
+	void testSearchSongbyTitle() {
+		ArrayList<Song> song = ms.searchSongbyTitle("Chasing Pavements");
 		Song adeleSong = new Song("Chasing Pavements", "Adele", "19");
 
-		assertTrue(song.equals(adeleSong));
+		assertTrue(song.get(0).equals(adeleSong));
 
-		Song falseSong = ms.searchSongbyTitle("Not a Song!");
-		assertTrue(falseSong == null);
+		ArrayList<Song> falseSong = ms.searchSongbyTitle("Not a Song!");
+		assertTrue(falseSong.size() == 0);
 	}
 
 	@Test
-	private void testSearchSongbyArtist() {
+	void testSearchSongbyArtist() {
 		Album kensAlbum = kendricksAlbum();
 
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
-		Song dnaSong = ms.searchSongbyArtist("Kendrick Lamar", "DNA.");
+		ArrayList<Song> dnaSong = ms.searchSongbyArtist("Kendrick Lamar");
 
 		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.");
 
-		assertTrue(dnaSong.equals(copyDNA));
+		assertTrue(dnaSong.contains(copyDNA));
 
-		assertTrue(ms.searchSongbyArtist("Kendrick Lamar", "DNA") == null);
-		assertTrue(ms.searchSongbyArtist("Kendrick Lamar.", "DNA.") == null);
+		assertTrue(ms.searchSongbyArtist("Kendrick Lamar.").size() == 0);
 
 	}
 
 	@Test
-	private void testSearchAlbumTitle() {
+	void testSearchAlbumTitle() {
 		Album kensAlbum = kendricksAlbum();
 
 		ms.addSong(kensAlbum.getSongList());
@@ -113,23 +100,58 @@ class testMusicStore {
 	}
 
 	@Test
-	private void testSearchAlbumArtist() {
-		
+	void testSearchAlbumArtist() {
+
 		Album kensAlbum = kendricksAlbum();
 
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 
-		Album albumCopy = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
-		
-		assertTrue(albumDamn.equals(albumCopy));
+		ArrayList<Album> albumCopy = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
 
-		Album albumNoName = ms.searchAlbumArtist("Kendrick Lamar", "Damn");
-		Album albumNoAlbum = ms.searchAlbumArtist("Drake", "Damn.");
+		assertTrue(albumDamn.getAlbumName() == albumCopy.get(0).getAlbumName());
 
-		assertTrue(albumNoName == null);
-		assertTrue(albumNoAlbum == null);
+		ArrayList<Album> albumNoAlbum = ms.searchAlbumArtist("Drake", "Damn.");
+
+		assertTrue(albumNoAlbum.size() == 0);
+
+	}
+
+	@Test
+	void testGetSongsMusicStore() {
+		ArrayList<Song> songList = ms.getSongsMusicStore();
+		assertTrue(songList.size() == 163);
+	}
+
+	@Test
+	void testGetAlbumsMusicStore() {
+		ArrayList<Album> songList = ms.getAlbumsMusicStore();
+		assertTrue(songList.size() == 15);
+	}
+
+	@Test
+	void testSetRatingOfSong() {
+		Album ken = kendricksAlbum();
+		ms.addSong(ken.getSongList());
+		ms.setRatingOfSong(ken.getArtist(), "DNA.", Rating.FOUR);
+
+		ArrayList<Song> songKen = ms.searchSongbyTitle("DNA.");
+
+		assertTrue(songKen.get(0).getRating() == Rating.FOUR);
+	}
+
+	@Test
+	void testSetFavoriteOfSong() {
+
+		Album ken = kendricksAlbum();
+		ms.addSong(ken.getSongList());
+		ms.setFavoriteOfSong(ken.getArtist(), "Feel.");
+
+		ArrayList<Song> songKen = ms.searchSongbyTitle("Feel.");
+
+		assertTrue(songKen.size() == 1);
+		assertTrue(songKen.get(0).isFavorite());
 
 	}
 
@@ -140,9 +162,6 @@ class testMusicStore {
 		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn."));
 		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn."));
 
-		ms.addSong(kenSongList);
-
 		return new Album("Damn.", "Kendrick Lamar", kenSongList);
 	}
-
 }

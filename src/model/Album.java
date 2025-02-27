@@ -15,10 +15,14 @@ public class Album {
 	}
 
 	// COPY CONSRUCTOR
-	public Album(Album other, ArrayList<Song> copySongList) {
+	public Album(Album other) {
 		this.album = other.album;
 		this.artist = other.artist;
-		this.songList = copySongList;
+		this.songList = new ArrayList<Song>();
+
+		for (Song song : other.songList) {
+			this.songList.add(new Song(song));
+		}
 	}
 
 	public String getArtist() {
