@@ -108,11 +108,11 @@ public class testLibraryModel {
 		lib.addAlbumToLibrary(ms, "Old Ideas", "Leonard Cohen"); // Contains duplicate
 		lib.addAlbumToLibrary(ms, "Boys & Girls", "Alabama Shakes");
 
-		ArrayList<Song> songList = lib.searchSongbyTitle("Hang Loose", "Alabama Shakes");
+		ArrayList<Song> songList = lib.searchSongbyTitle("Hang Loose");
 
 		assertTrue(songList.size() == 1);
 
-		songList = lib.searchSongbyTitle("Lullaby", "Leonard Cohen");
+		songList = lib.searchSongbyTitle("Lullaby");
 		assertTrue(songList.size() == 2);
 
 	}
@@ -161,10 +161,12 @@ public class testLibraryModel {
 		lib.addAlbumToLibrary(ms, "21", "Adele");
 		lib.addAlbumToLibrary(ms, "Begin Again", "Norah Jones");
 
-		Album album = lib.searchAlbumArtist("Adele", "21").get(0);
+		ArrayList<Album> album = lib.searchAlbumArtist("Adele");
 
-		assertTrue(album.getAlbumName().equals("21"));
-		assertTrue(album.getArtist().equals("Adele"));
+		assertTrue(album.size() == 2);
+		assertTrue(album.get(0).getAlbumName().equals("19 "));
+		assertTrue(album.get(1).getAlbumName().equals("21"));
+		assertTrue(album.get(0).getArtist().equals("Adele"));
 
 	}
 
@@ -204,16 +206,19 @@ public class testLibraryModel {
 		assertFalse(lib.addAlbumToLibrary(ms, "19", "21 Savage"));
 	}
 
-	@Test
+	@Test // FIX THIS
 	void testAddSongToPlaylist() {
 
 		lib.createPlayList("TEST");
 		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 0);
 
 		lib.addSongToPlaylist("TEST", "IDGAF", "Drake", "For All the Dogs");
+		lib.addSongToPlaylist("TEST", "IDGAF", "Drake", "For All the Dogs");
 
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 1);
+		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 2);
 		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().get(0).getTitle().equals("IDGAF"));
+		
+		
 
 	}
 

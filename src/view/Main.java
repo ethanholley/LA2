@@ -1,204 +1,168 @@
 package view;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import model.*;
+
 public class Main {
 
-	private int height;
-	private int length;
+	private MusicStore ms;
+	private LibraryModel lib;
 
 	public Main() {
 
-		this.height = 20;
-		this.length = 90;
-	}
-
-	// THIS IS TEMP, CAN BE REDSGNED TO MAKE METHOD SMALLER***
-	private String welcomeScreen() {
-
-		String welcomeStr = ("*" + "-".repeat(90) + "*\n");
-
-		for (int i = 0; i < this.height; i++) {
-
-			if (i == 0) {
-				welcomeStr += ("|");
-				welcomeStr += (" ".repeat(70));
-				welcomeStr += ("Additional Info (>) ");
-				welcomeStr += ("|\n");
-
-			} else if (i == 5) {
-				welcomeStr += ("|");
-				welcomeStr += (" ".repeat(41));
-				welcomeStr += ("Welcome");
-				welcomeStr += (" ".repeat(42));
-				welcomeStr += ("|\n");
-			} else if (i == 6) {
-				welcomeStr += ("|");
-				welcomeStr += (" ".repeat(38));
-				welcomeStr += ("To Your Music!");
-				welcomeStr += (" ".repeat(38));
-				welcomeStr += ("|\n");
-			} else if (i == 12) {
-				welcomeStr += ("|");
-				welcomeStr += (" ".repeat(17));
-				welcomeStr += ("Instructions");
-
-				welcomeStr += (" ".repeat(32));
-
-				welcomeStr += ("Main Menu");
-				welcomeStr += (" ".repeat(20));
-				welcomeStr += ("|\n");
-			} else if (i == this.height - 1) {
-				welcomeStr += ("|");
-				welcomeStr += (" ".repeat(17));
-
-				welcomeStr += ("Type either Instructions or Main Menu into the console.");
-
-				welcomeStr += (" ".repeat(18));
-				welcomeStr += ("|\n");
-			} else {
-				welcomeStr += ("|");
-				welcomeStr += (" ".repeat(this.length));
-				welcomeStr += ("|\n");
-			}
-
-		}
-		welcomeStr += ("*" + "-".repeat(this.length) + "*\n");
-
-		return welcomeStr;
+		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+		ms = pf.getMusicStore();
+		lib = new LibraryModel();
+		mainMenu();
 
 	}
 
-	// THIS IS TEMP, CAN BE REDSGNED TO MAKE METHOD SMALLER***
-	private String instructionsScreen() {
+	private void mainMenu() {
+		System.out.println("Welcome to Your Music Aplication.\n");
+		System.out.println("Choose one of the options below in the Console\n");
+		System.out.println("Search Music Store     See Library     Search Library     Create Playlist\n");
+		Scanner scanner = new Scanner(System.in);
 
-		String instrStr = ("*" + "-".repeat(this.length) + "*\n");
+		String execution = scanner.nextLine().toLowerCase();
+		pickDestination(execution);
+	}
 
-		for (int i = 0; i < this.height; i++) {
+	private void pickDestination(String execution) {
 
-			if (i == 0) {
-				instrStr += ("| ");
-				instrStr += ("(<) Back");
-				instrStr += (" ".repeat(81));
-				instrStr += ("|\n");
+		if (execution.equals("search music store")) {
+			System.out.println("search music store.");
 
-			} else if (i == 3) {
+		} else if (execution.equals("see library")) {
+			System.out.println("see library.");
 
-				instrStr += ("|");
-				instrStr += (" ".repeat(21));
-				instrStr += ("Instruction Manual for the Text-Based Console UI");
-				instrStr += (" ".repeat(21));
-				instrStr += ("|\n");
+		} else if (execution.equals("search library")) {
+			searchLibrary();
 
-			} else if (i == 8) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "This text-based console UI allows users to navigate through menus and make selections by";
-				instrStr += (" ".repeat(1));
-				instrStr += ("|\n");
-			} else if (i == 9) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "typing simple text commands. When a new menu appears, options are displayed in ASCII";
-				instrStr += (" ".repeat(5));
-				instrStr += ("|\n");
-			} else if (i == 10) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "format with labels or numbers (e.g., \"Option 1,\" \"Option 2\"). To make a selection, simply";
-				instrStr += (" ".repeat(0));
-				instrStr += ("|\n");
-			} else if (i == 11) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "type the corresponding number or label, and the input is not case-sensitive, meaning you";
-				instrStr += (" ".repeat(1));
-				instrStr += ("|\n");
-			} else if (i == 12) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "can use uppercase, lowercase, or a mix of both. If you wish to go back to a previous";
-				instrStr += (" ".repeat(5));
-				instrStr += ("|\n");
-			} else if (i == 13) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "screen, typing \"back\" will return you to the previous menu. There are no confirmation";
-				instrStr += (" ".repeat(4));
-				instrStr += ("|\n");
-			} else if (i == 14) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "prompts in the program, so actions are performed immediately upon selection to save time";
-				instrStr += (" ".repeat(1));
-				instrStr += ("|\n");
-			} else if (i == 15) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "and avoid unnecessary delays. This allows for quick and easy navigation through the";
-				instrStr += (" ".repeat(6));
-				instrStr += ("|\n");
-			} else if (i == 16) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "options. Simply type the option as shown on the screen and press Enter to proceed. If";
-				instrStr += (" ".repeat(4));
-				instrStr += ("|\n");
-			} else if (i == 17) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "you're unsure, most menus include an \"Exit\" or \"Back\" option to safely exit or return to";
-				instrStr += (" ".repeat(1));
-				instrStr += ("|\n");
-			} else if (i == 18) {
-				instrStr += ("|");
-				instrStr += (" ".repeat(1));
-				instrStr += "earlier screens.";
-				instrStr += (" ".repeat(73));
-				instrStr += ("|\n");
-			} else {
-				instrStr += ("|");
-				instrStr += (" ".repeat(this.length));
-				instrStr += ("|\n");
-			}
+		} else if (execution.equals("create playlist")) {
+			System.out.println("create playlist.");
+		} else {
+			System.out.println("Invalid Input, please try again.");
+			Scanner scanner = new Scanner(System.in);
+			execution = scanner.nextLine().toLowerCase();
+			pickDestination(execution);
 		}
-
-		instrStr += ("*" + "-".repeat(this.length) + "*\n");
-
-		return instrStr;
 
 	}
 
-	private String additionalInfoScreen() {
+	private void searchLibrary() {
+		System.out.println(
+				"Welcome to the library Search. Here is a list of the things you can search in the library:\n\n");
+		System.out.println("Please pick one options to search by.\n");
+		System.out.println("Song   Artist   Album\n");
 
-		String infoStr = ("*" + "-".repeat(this.length) + "*\n");
+		Scanner scanner = new Scanner(System.in);
+		String execution = scanner.nextLine().toLowerCase();
 
-		// AUTHORS, PROJECT NAME, CLASS NAME/LEVEL, PRUPOSE OF PROJECT
-		for (int i = 0; i < this.height; i++) {
-			if (i == 0) {
-				infoStr += ("| ");
-				infoStr += ("(<) Back");
-				infoStr += (" ".repeat(81));
-				infoStr += ("|\n");
+		boolean flag = true;
 
+		while (flag) {
+			if (execution.equals("song")) {
+				librarySongSearch();
+				flag = false;
+			} else if (execution.equals("artist")) {
+
+				flag = false;
+			} else if (execution.equals("album")) {
+
+				flag = false;
 			} else {
-				infoStr += ("|");
-				infoStr += (" ".repeat(this.length));
-				infoStr += ("|\n");
+				System.out.println("Invalid Input, please try again.");
+				Scanner newScanner = new Scanner(System.in);
+				execution = newScanner.nextLine().toLowerCase();
 			}
-
 		}
 
-		infoStr += ("*" + "-".repeat(this.length) + "*\n");
+	}
 
-		return infoStr;
+	// need to test this with ms search
+	private void librarySongSearch() {
+		System.out.println("What Song are you Searching for?\n\n");
+		Scanner scanner = new Scanner(System.in);
+		String execution = scanner.nextLine().toLowerCase();
+		Song song = null;
+
+		ArrayList<Song> songList = lib.searchSongbyTitle(execution);
+
+		songList.add(new Song("DNA.", "Kendrick Lamar", "Damn."));
+//		songList.add(new Song("DNA.", "Bendrick Yamar", "Damn."));
+
+		if (songList.size() == 0) {
+			System.out.println("I'm sorry, I couldn't find that song. Please try again.");
+			librarySongSearch();
+		} else if (songList.size() > 1) {
+			System.out
+					.println("There are more than 1 song with ths title.\nWhich Artist of the Song would you like?\n");
+			int i = 0;
+			while (i < songList.size()) {
+				System.out.println(songList.get(i).getTitle() + " By: " + songList.get(i).getArtist());
+				i++;
+			}
+			System.out.println("\nPick the Artist of the Song you want to choose from.\n");
+			boolean flag = true;
+
+			while (flag) {
+				String artistChoice = scanner.nextLine().toLowerCase();
+				for (Song curSong : songList) {
+					if (curSong.getArtist().toLowerCase().equals(artistChoice)) {
+						song = new Song(curSong);
+						flag = false;
+						break;
+					}
+				}
+				if (flag) {
+					System.out.println("Please Try Again.\n");
+				}
+			}
+		} else {
+			song = new Song(songList.get(0));
+		}
+		librarySearchPlaylist(song);
+	}
+
+	private void librarySearchPlaylist(Song song) {
+		System.out.println("What Would you like to do with this? Here are your options.\n");
+		System.out.println("Add to Playlist\n");
+
+		Scanner scanner = new Scanner(System.in);
+		String execution = scanner.nextLine().toLowerCase();
+
+		if (execution.equals("add to playlist")) {
+
+			System.out.println("What is the name of the Playlist?\n");
+			String playlistName = scanner.nextLine().toLowerCase();
+			ArrayList<Playlist> playlistList = lib.getAllPlayList();
+
+			boolean found = false;
+			for (Playlist pl : playlistList) {
+				if (pl.getPlaylistName().toLowerCase().equals(playlistName)) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				System.out.println("Playlist not created. Create Playlist at main menu.\n\n");
+			} else {
+				lib.addSongToPlaylist(playlistName, song.getTitle(), song.getArtist(), song.getAlbum());
+			}
+
+		} else {
+			System.out.println("Im Sorry, Invalid Input, Please try again.\n\n");
+			librarySearchPlaylist(song);
+		}
+		System.out.println("loading back to Main Menu...\\n\\n");
+		mainMenu();
 	}
 
 	public static void main(String[] args) {
 
 		Main m = new Main();
-
-		System.out.println(m.welcomeScreen());
-		System.out.println(m.instructionsScreen());
-		System.out.println(m.additionalInfoScreen());
 
 	}
 }

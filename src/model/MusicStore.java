@@ -62,7 +62,7 @@ public class MusicStore {
 	public ArrayList<Song> searchSongbyTitle(String title) {
 		ArrayList<Song> allSongsWithTitle = new ArrayList<Song>();
 		for (Song song : allSongsList) {
-			if (song.getTitle().equals(title)) {
+			if (song.getTitle().toLowerCase().equals(title)) {
 				allSongsWithTitle.add(new Song(song)); // add song object
 			}
 		}
@@ -73,7 +73,7 @@ public class MusicStore {
 	public ArrayList<Song> searchSongbyArtist(String artist) {
 		ArrayList<Song> allSongsByArtist = new ArrayList<Song>();
 		for (Song song : allSongsList) {
-			if (song.getArtist() == artist) {
+			if (song.getArtist().toLowerCase() == artist) {
 				allSongsByArtist.add(new Song(song));
 			}
 		}
@@ -84,7 +84,7 @@ public class MusicStore {
 	// the title
 	public Album searchAlbumTitle(String albumTitle) {
 		for (Album album : allAlbumsList) {
-			if (album.getAlbumName() == albumTitle) {
+			if (album.getAlbumName().toLowerCase() == albumTitle) {
 				return new Album(album); // return copy of the album
 			}
 		}
@@ -95,7 +95,7 @@ public class MusicStore {
 	public ArrayList<Album> searchAlbumArtist(String artist, String albumName) {
 		ArrayList<Album> allAlbumsByArtist = new ArrayList<Album>();
 		for (Album album : allAlbumsList) {
-			if (album.getArtist() == artist) {
+			if (album.getArtist().toLowerCase() == artist) {
 				allAlbumsByArtist.add(new Album(album)); // add copy of the album
 			}
 		}
@@ -105,7 +105,7 @@ public class MusicStore {
 	// SET RATING
 	public void setRatingOfSong(String Artist, String Song, Rating rating) {
 		for (Song song : this.allSongsList) {
-			if (song.getArtist().equals(Artist) && song.getTitle().equals(Song)) {
+			if (song.getArtist().toLowerCase().equals(Artist) && song.getTitle().toLowerCase().equals(Song)) {
 				song.setRating(rating);
 				break;
 			}
@@ -115,7 +115,7 @@ public class MusicStore {
 	// SET FAV
 	public void setFavoriteOfSong(String Artist, String Song) {
 		for (Song song : this.allSongsList) {
-			if (song.getArtist().equals(Artist) && song.getTitle().equals(Song)) {
+			if (song.getArtist().toLowerCase().equals(Artist) && song.getTitle().toLowerCase().equals(Song)) {
 				song.setFavorite();
 				break;
 			}

@@ -21,7 +21,7 @@ public class ParseFile {
 	}
 
 	public MusicStore getMusicStore() {
-		return musicStore;
+		return new MusicStore(this.musicStore);
 	}
 
 	/**
