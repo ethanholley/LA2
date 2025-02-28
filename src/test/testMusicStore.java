@@ -35,7 +35,7 @@ public class testMusicStore {
 
 		ms.addSong(songList);
 
-		ArrayList<Song> song2 = ms.searchSongbyArtist("Drake");
+		ArrayList<Song> song2 = ms.searchSongbyArtist("Drake".toLowerCase());
 
 		assertTrue(song1.equals(song2.get(0)));
 		assertFalse(song1 == song2.get(0)); // Checks to make sure songs aren't aliases
@@ -50,19 +50,19 @@ public class testMusicStore {
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
-		ArrayList<Album> copyKen = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
+		ArrayList<Album> copyKen = ms.searchAlbumArtist("Kendrick Lamar".toLowerCase());
 
 		assertTrue(copyKen.get(0).equals(kendrickAlbum));
 	}
 
 	@Test
 	void testSearchSongbyTitle() {
-		ArrayList<Song> song = ms.searchSongbyTitle("Chasing Pavements");
+		ArrayList<Song> song = ms.searchSongbyTitle("Chasing Pavements".toLowerCase());
 		Song adeleSong = new Song("Chasing Pavements", "Adele", "19");
 
 		assertTrue(song.get(0).equals(adeleSong));
 
-		ArrayList<Song> falseSong = ms.searchSongbyTitle("Not a Song!");
+		ArrayList<Song> falseSong = ms.searchSongbyTitle("Not a Song!".toLowerCase());
 		assertTrue(falseSong.size() == 0);
 	}
 
@@ -73,7 +73,7 @@ public class testMusicStore {
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
-		ArrayList<Song> dnaSong = ms.searchSongbyArtist("Kendrick Lamar");
+		ArrayList<Song> dnaSong = ms.searchSongbyArtist("Kendrick Lamar".toLowerCase());
 
 		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.");
 
@@ -90,7 +90,7 @@ public class testMusicStore {
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
-		Album albumCopy = ms.searchAlbumTitle("Damn.");
+		Album albumCopy = ms.searchAlbumTitle("Damn.".toLowerCase());
 
 		assertTrue(albumDamn.equals(albumCopy));
 
@@ -108,11 +108,11 @@ public class testMusicStore {
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 
-		ArrayList<Album> albumCopy = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
+		ArrayList<Album> albumCopy = ms.searchAlbumArtist("Kendrick Lamar".toLowerCase());
 
-		assertTrue(albumDamn.getAlbumName() == albumCopy.get(0).getAlbumName());
+		assertTrue(albumDamn.getAlbumName().toLowerCase().equals(albumCopy.get(0).getAlbumName().toLowerCase()));
 
-		ArrayList<Album> albumNoAlbum = ms.searchAlbumArtist("Drake", "Damn.");
+		ArrayList<Album> albumNoAlbum = ms.searchAlbumArtist("Drake".toLowerCase());
 
 		assertTrue(albumNoAlbum.size() == 0);
 
@@ -134,9 +134,9 @@ public class testMusicStore {
 	void testSetRatingOfSong() {
 		Album ken = kendricksAlbum();
 		ms.addSong(ken.getSongList());
-		ms.setRatingOfSong(ken.getArtist(), "DNA.", Rating.FOUR);
+		ms.setRatingOfSong(ken.getArtist().toLowerCase(), "DNA.".toLowerCase(), Rating.FOUR);
 
-		ArrayList<Song> songKen = ms.searchSongbyTitle("DNA.");
+		ArrayList<Song> songKen = ms.searchSongbyTitle("DNA.".toLowerCase());
 
 		assertTrue(songKen.get(0).getRating() == Rating.FOUR);
 	}
@@ -146,9 +146,9 @@ public class testMusicStore {
 
 		Album ken = kendricksAlbum();
 		ms.addSong(ken.getSongList());
-		ms.setFavoriteOfSong(ken.getArtist(), "Feel.");
+		ms.setFavoriteOfSong(ken.getArtist().toLowerCase(), "Feel.".toLowerCase());
 
-		ArrayList<Song> songKen = ms.searchSongbyTitle("Feel.");
+		ArrayList<Song> songKen = ms.searchSongbyTitle("Feel.".toLowerCase());
 
 		assertTrue(songKen.size() == 1);
 		assertTrue(songKen.get(0).isFavorite());
