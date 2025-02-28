@@ -15,7 +15,7 @@ import model.Rating;
 
 public class testMusicStore {
 
-	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 	MusicStore ms = pf.getMusicStore();
 	Album albumDamn = kendricksAlbum();
 
@@ -50,7 +50,7 @@ public class testMusicStore {
 		ms.addSong(kensAlbum.getSongList());
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
-		ArrayList<Album> copyKen = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
+		ArrayList<Album> copyKen = ms.searchAlbumArtist("Kendrick Lamar");
 
 		assertTrue(copyKen.get(0).equals(kendrickAlbum));
 	}
@@ -108,11 +108,11 @@ public class testMusicStore {
 
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 
-		ArrayList<Album> albumCopy = ms.searchAlbumArtist("Kendrick Lamar", "Damn.");
+		ArrayList<Album> albumCopy = ms.searchAlbumArtist("Kendrick Lamar");
 
 		assertTrue(albumDamn.getAlbumName() == albumCopy.get(0).getAlbumName());
 
-		ArrayList<Album> albumNoAlbum = ms.searchAlbumArtist("Drake", "Damn.");
+		ArrayList<Album> albumNoAlbum = ms.searchAlbumArtist("Drake");
 
 		assertTrue(albumNoAlbum.size() == 0);
 

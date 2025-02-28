@@ -21,5 +21,4 @@ public enum Rating {
 		else
 			return this.getRating() == other.getRating();
 	}
-
 }

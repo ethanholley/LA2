@@ -1,3 +1,4 @@
+
 package model;
 
 import java.util.ArrayList;
@@ -73,10 +74,10 @@ public class LibraryModel {
 
 	// iterates through song list and returns a list of all the songs with same
 	// title
-	public ArrayList<Song> searchSongbyTitle(String title, String artist) {
+	public ArrayList<Song> searchSongbyTitle(String title) {
 		ArrayList<Song> songsWithTitle = new ArrayList<Song>();
 		for (Song song : songLibrary) {
-			if (song.getTitle().equals(title)) {
+			if (song.getTitle().toLowerCase().equals(title)) {
 				songsWithTitle.add(new Song(song));
 			}
 		}
@@ -88,7 +89,7 @@ public class LibraryModel {
 	public ArrayList<Song> searchSongbyArtist(String artist, String title) {
 		ArrayList<Song> allArtistSongs = new ArrayList<Song>();
 		for (Song song : songLibrary) {
-			if (song.getArtist().equals(artist) && song.getTitle().equals(title)) {
+			if (song.getArtist().toLowerCase().equals(artist) && song.getTitle().toLowerCase().equals(title)) {
 				allArtistSongs.add(new Song(song));
 			}
 		}
@@ -99,7 +100,7 @@ public class LibraryModel {
 	// the title
 	public Album searchAlbumTitle(String albumTitle) {
 		for (Album album : albumLibrary) {
-			if (album.getAlbumName().equals(albumTitle)) {
+			if (album.getAlbumName().toLowerCase().equals(albumTitle)) {
 				return new Album(album); // return copy of the album
 			}
 		}
@@ -108,10 +109,10 @@ public class LibraryModel {
 
 	// iterates through albums, returns a deep copy of all the album objects that
 	// matches with the artist
-	public ArrayList<Album> searchAlbumArtist(String artist, String albumName) {
+	public ArrayList<Album> searchAlbumArtist(String artist) {
 		ArrayList<Album> allArtistAlbums = new ArrayList<Album>();
 		for (Album album : albumLibrary) {
-			if (album.getArtist().equals(artist) && album.getAlbumName().equals(albumName)) {
+			if (album.getArtist().toLowerCase().equals(artist)) {
 				allArtistAlbums.add(new Album(album)); // return copy of the album
 			}
 		}
@@ -122,7 +123,7 @@ public class LibraryModel {
 	// matches with name
 	public Playlist searchPlaylistByName(String playlistName) {
 		for (Playlist playlist : playlistLibrary) {
-			if (playlist.getPlaylistName().equals(playlistName)) {
+			if (playlist.getPlaylistName().toLowerCase().equals(playlistName)) {
 				return new Playlist(playlist);
 			}
 		}
@@ -132,7 +133,7 @@ public class LibraryModel {
 	// adds a song to the Song list library
 	public boolean addSongToLibrary(MusicStore ms, String title, String artist) {
 		for (Song song : ms.getSongsMusicStore()) { // iterate over songs in music store that are available
-			if (song.getTitle().equals(title) && song.getArtist().equals(artist)) {
+			if (song.getTitle().toLowerCase().equals(title) && song.getArtist().toLowerCase().equals(artist)) {
 				if (!songLibrary.contains(song)) {
 					songLibrary.add(new Song(song)); // add song to library if not in list yet
 				}
@@ -145,7 +146,8 @@ public class LibraryModel {
 	// adds an album to the Album list library
 	public boolean addAlbumToLibrary(MusicStore ms, String albumName, String artist) {
 		for (Album album : ms.getAlbumsMusicStore()) { // iterate over albums in music store that are available
-			if (album.getAlbumName().equals(albumName) && album.getArtist().equals(artist)) {
+			if (album.getAlbumName().toLowerCase().equals(albumName)
+					&& album.getArtist().toLowerCase().equals(artist)) {
 				for (Song song : album.getSongList()) { // add all songs from album to songLibrary
 					if (!songLibrary.contains(song)) {
 						songLibrary.add(song);
@@ -161,14 +163,19 @@ public class LibraryModel {
 	public void addSongToPlaylist(String playlistName, String songTitle, String artist, String albumTitle) {
 		for (Playlist playlist : playlistLibrary) {
 			if (playlist.getPlaylistName().equals(playlistName)) {
-				playlist.addSongToPlaylist(songTitle, artist, albumTitle);
+				if (!playlist.getUserSongList().contains(new Song(songTitle, artist, albumTitle))) {
+					playlist.addSongToPlaylist(songTitle, artist, albumTitle);
+				}
+				if (!songLibrary.contains(new Song(songTitle, artist, albumTitle))) {
+					songLibrary.add(new Song(songTitle, artist, albumTitle)); // add song to library if not in list yet
+				}
 			}
 		}
 	}
 
 	public void removeSongPlaylist(String playlistName, String songTitle, String artist) {
 		for (Playlist playlist : playlistLibrary) {
-			if (playlist.getPlaylistName().equals(playlistName)) {
+			if (playlist.getPlaylistName().toLowerCase().equals(playlistName.toLowerCase())) {
 				playlist.removeSongFromPlaylist(songTitle, artist);
 			}
 		}

@@ -1,3 +1,4 @@
+
 package model;
 
 public class Song {
@@ -63,7 +64,7 @@ public class Song {
 	@Override
 	public String toString() {
 
-		return title + " " + artist;
+		return title + " By: " + artist + " Album: " + album;
 
 	}
 
