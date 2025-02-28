@@ -126,6 +126,7 @@ public class Main {
 		librarySearchPlaylist(song);
 	}
 
+	// PLEASE :(
 	private void librarySearchPlaylist(Song song) {
 		System.out.println("What Would you like to do with this? Here are your options.\n");
 		System.out.println("Add to Playlist\n");
