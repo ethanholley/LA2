@@ -44,6 +44,7 @@ public class ParseFile {
 			}
 
 		} catch (IOException e) {
+			System.out.println("File not found");
 			e.printStackTrace();
 		}
 	}
@@ -87,12 +88,11 @@ public class ParseFile {
 			scanner.close(); // Close scanner to avoid resource leak
 
 		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
 			e.printStackTrace();
 		}
 
-		// TODO: Uncomment and implement methods in MusicStore
 		this.musicStore.addAlbum(albumName, artist, new ArrayList<>(songList));
 		this.musicStore.addSong(new ArrayList<>(songList));
-//		this.musicStore.addArtist(artist);
 	}
 }

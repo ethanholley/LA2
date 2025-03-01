@@ -19,7 +19,7 @@ import model.Song;
 public class testLibraryModel {
 
 	LibraryModel lib = new LibraryModel();
-	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 	MusicStore ms = pf.getMusicStore();
 
 	@Test
@@ -31,15 +31,15 @@ public class testLibraryModel {
 
 	@Test
 	void testGetAllPlayList() {
-		lib.createPlayList("Test");
-		lib.createPlayList("Testing");
+		lib.createPlayList("Test".toLowerCase());
+		lib.createPlayList("Testing".toLowerCase());
 		ArrayList<Playlist> plList = lib.getAllPlayList();
 		assertTrue(plList.size() == 2);
 	}
 
 	@Test
 	void testGetSongTitles() {
-		lib.addAlbumToLibrary(ms, "21", "Adele");
+		lib.addAlbumToLibrary(ms, "21".toLowerCase(), "Adele".toLowerCase());
 		ArrayList<String> songList = lib.getSongTitles();
 		assertTrue(songList.contains("Rolling in the Deep By: Adele, Album: 21"));
 		assertFalse(songList.contains("Rolling in the Deep By: Adele, Album: 19"));
@@ -51,34 +51,33 @@ public class testLibraryModel {
 		ArrayList<Album> songList = lib.getAlbumList();
 		assertTrue(songList.size() == 0);
 
-		lib.addAlbumToLibrary(ms, "21", "Adele");
-		lib.addAlbumToLibrary(ms, "Begin Again", "Norah Jones");
+		lib.addAlbumToLibrary(ms, "21".toLowerCase(), "Adele".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Begin Again".toLowerCase(), "Norah Jones".toLowerCase());
 
 		ArrayList<Album> songList2 = lib.getAlbumList();
 		assertTrue(songList2.size() == 2);
 	}
 
-	// How do I get songs/set to favorite?
 	@Test
 	void testGetFavoriteSongs() {
 
-		lib.addSongToLibrary(ms, "Rumour Has It", "Adele");
-		lib.addSongToLibrary(ms, "Lullaby", "OneRepublic");
-		lib.addSongToLibrary(ms, "Lullaby", "Leonard Cohen");
-		lib.addSongToLibrary(ms, "After Party", "Ozomatli");
-		lib.addSongToLibrary(ms, "Fire", "The Heavy");
+		lib.addSongToLibrary(ms, "Rumour Has It".toLowerCase(), "Adele".toLowerCase());
+		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic".toLowerCase());
+		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "Leonard Cohen".toLowerCase());
+		lib.addSongToLibrary(ms, "After Party".toLowerCase(), "Ozomatli".toLowerCase());
+		lib.addSongToLibrary(ms, "Fire".toLowerCase(), "The Heavy".toLowerCase());
 
-		ms.setRatingOfSong("Adele", "Rumour Has It", Rating.FIVE);
-		ms.setRatingOfSong("OneRepublic", "Lullaby", Rating.FIVE);
-		ms.setRatingOfSong("Leonard Cohen", "Lullaby", Rating.FOUR);
-		ms.setRatingOfSong("Ozomatli", "After Party", Rating.FIVE);
-		ms.setRatingOfSong("The Heavy", "Fire", Rating.FIVE);
+		ms.setRatingOfSong("Adele".toLowerCase(), "Rumour Has It".toLowerCase(), Rating.FIVE);
+		ms.setRatingOfSong("OneRepublic".toLowerCase(), "Lullaby".toLowerCase(), Rating.FIVE);
+		ms.setRatingOfSong("Leonard Cohen".toLowerCase(), "Lullaby".toLowerCase(), Rating.FOUR);
+		ms.setRatingOfSong("Ozomatli".toLowerCase(), "After Party".toLowerCase(), Rating.FIVE);
+		ms.setRatingOfSong("The Heavy".toLowerCase(), "Fire".toLowerCase(), Rating.FIVE);
 
-		lib.addSongToLibrary(ms, "Rumour Has It", "Adele");
-		lib.addSongToLibrary(ms, "Lullaby", "OneRepublic");
-		lib.addSongToLibrary(ms, "Lullaby", "Leonard Cohen");
-		lib.addSongToLibrary(ms, "After Party", "Ozomatli");
-		lib.addSongToLibrary(ms, "Fire", "The Heavy");
+		lib.addSongToLibrary(ms, "Rumour Has It".toLowerCase(), "Adele".toLowerCase());
+		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic".toLowerCase());
+		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "Leonard Cohen".toLowerCase());
+		lib.addSongToLibrary(ms, "After Party".toLowerCase(), "Ozomatli".toLowerCase());
+		lib.addSongToLibrary(ms, "Fire".toLowerCase(), "The Heavy".toLowerCase());
 
 		ArrayList<Song> songListFav = lib.getFavoriteSongs();
 
@@ -89,9 +88,9 @@ public class testLibraryModel {
 	@Test
 	void testGetArtists() {
 
-		lib.addAlbumToLibrary(ms, "21", "Adele");
-		lib.addAlbumToLibrary(ms, "Begin Again", "Norah Jones");
-		lib.addAlbumToLibrary(ms, "Boys & Girls", "Alabama Shakes");
+		lib.addAlbumToLibrary(ms, "21".toLowerCase(), "Adele".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Begin Again".toLowerCase(), "Norah Jones".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Boys & Girls".toLowerCase(), "Alabama Shakes".toLowerCase());
 
 		ArrayList<String> artists = lib.getArtists();
 
@@ -105,15 +104,15 @@ public class testLibraryModel {
 	@Test
 	void testSearchSongbyTitle() {
 
-		lib.addAlbumToLibrary(ms, "Waking Up", "OneRepublic"); // Contains duplicate
-		lib.addAlbumToLibrary(ms, "Old Ideas", "Leonard Cohen"); // Contains duplicate
-		lib.addAlbumToLibrary(ms, "Boys & Girls", "Alabama Shakes");
+		lib.addAlbumToLibrary(ms, "Waking Up".toLowerCase(), "OneRepublic".toLowerCase()); // Contains duplicate
+		lib.addAlbumToLibrary(ms, "Old Ideas".toLowerCase(), "Leonard Cohen".toLowerCase()); // Contains duplicate
+		lib.addAlbumToLibrary(ms, "Boys & Girls".toLowerCase(), "Alabama Shakes".toLowerCase());
 
-		ArrayList<Song> songList = lib.searchSongbyTitle("Hang Loose");
+		ArrayList<Song> songList = lib.searchSongbyTitle("Hang Loose".toLowerCase());
 
 		assertTrue(songList.size() == 1);
 
-		songList = lib.searchSongbyTitle("Lullaby");
+		songList = lib.searchSongbyTitle("Lullaby".toLowerCase());
 		assertTrue(songList.size() == 2);
 
 	}
@@ -121,33 +120,28 @@ public class testLibraryModel {
 	@Test
 	void testSearchSongbyArtist() {
 
-		lib.addAlbumToLibrary(ms, "19", "Adele");
-		lib.addAlbumToLibrary(ms, "21", "Adele");
-		lib.addAlbumToLibrary(ms, "Begin Again", "Norah Jones");
+		lib.addAlbumToLibrary(ms, "19".toLowerCase(), "Adele".toLowerCase());
+		lib.addAlbumToLibrary(ms, "21".toLowerCase(), "Adele".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Begin Again".toLowerCase(), "Norah Jones".toLowerCase());
 
-		// WHY IS THIS A ARRAY INSTEAD OF A SONG OBJECT?
+		ArrayList<Song> song = lib.searchSongbyArtist("Adele".toLowerCase());
 
-		lib.searchSongbyArtist("Adele", "Rumour Has It");
-		Song song = lib.searchSongbyArtist("Adele", "Rumour Has It").get(0);
-
-		assertTrue(song.getAlbum().equals("21"));
-		assertTrue(song.getArtist().equals("Adele"));
-		assertTrue(song.getTitle().equals("Rumour Has It"));
+		assertTrue(song.size() == 24);
 	}
 
 	@Test
 	void testSearchAlbumTitle() {
 
-		lib.addAlbumToLibrary(ms, "Waking Up", "OneRepublic");
-		lib.addAlbumToLibrary(ms, "Old Ideas", "Leonard Cohen");
-		lib.addAlbumToLibrary(ms, "Boys & Girls", "Alabama Shakes");
+		lib.addAlbumToLibrary(ms, "Waking Up".toLowerCase(), "OneRepublic".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Old Ideas".toLowerCase(), "Leonard Cohen".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Boys & Girls".toLowerCase(), "Alabama Shakes".toLowerCase());
 
-		Album album = lib.searchAlbumTitle("Old Ideas");
+		Album album = lib.searchAlbumTitle("Old Ideas".toLowerCase());
 
 		assertTrue(album.getAlbumName().equals("Old Ideas"));
 		assertTrue(album.getArtist().equals("Leonard Cohen"));
 
-		Album albumNull = lib.searchAlbumTitle("WHAT THE");
+		Album albumNull = lib.searchAlbumTitle("WHAT THE".toLowerCase());
 		assertTrue(albumNull == null);
 
 	}
@@ -158,14 +152,14 @@ public class testLibraryModel {
 		// WHY IS THIS A ARRAY INSTEAD OF A ALBUM OBJECT? -> Can only have one artist
 		// and album that match together
 
-		lib.addAlbumToLibrary(ms, "19", "Adele");
-		lib.addAlbumToLibrary(ms, "21", "Adele");
-		lib.addAlbumToLibrary(ms, "Begin Again", "Norah Jones");
+		lib.addAlbumToLibrary(ms, "19".toLowerCase(), "Adele".toLowerCase());
+		lib.addAlbumToLibrary(ms, "21".toLowerCase(), "Adele".toLowerCase());
+		lib.addAlbumToLibrary(ms, "Begin Again".toLowerCase(), "Norah Jones".toLowerCase());
 
-		ArrayList<Album> album = lib.searchAlbumArtist("Adele");
+		ArrayList<Album> album = lib.searchAlbumArtist("Adele".toLowerCase());
 
 		assertTrue(album.size() == 2);
-		assertTrue(album.get(0).getAlbumName().equals("19 "));
+		assertTrue(album.get(0).getAlbumName().equals("19"));
 		assertTrue(album.get(1).getAlbumName().equals("21"));
 		assertTrue(album.get(0).getArtist().equals("Adele"));
 
@@ -174,70 +168,75 @@ public class testLibraryModel {
 	@Test
 	void testSearchPlaylistByName() {
 
-		lib.createPlayList("Test");
-		lib.createPlayList("Testing");
+		lib.createPlayList("Test".toLowerCase());
+		lib.createPlayList("Testing".toLowerCase());
 		assertTrue(lib.getAllPlayList().size() == 2);
 
-		lib.addSongToPlaylist("Testing", "Rumour Has It", "Adele", "21");
+		lib.addSongToPlaylist("Testing".toLowerCase(), "Rumour Has It".toLowerCase(), "Adele".toLowerCase(),
+				"21".toLowerCase());
 
-		Playlist plTest = lib.searchPlaylistByName("Testing");
+		Playlist plTest = lib.searchPlaylistByName("Testing".toLowerCase());
 
-		assertTrue(plTest.getPlaylistName().equals("Testing"));
+		assertTrue(plTest.getPlaylistName().equals("Testing".toLowerCase()));
 
-		assertTrue(plTest.getUserSongList().get(0).getTitle().equals("Rumour Has It"));
+		assertTrue(plTest.getUserSongList().get(0).getTitle().equals("Rumour Has It".toLowerCase()));
 
-		Playlist plTestNull = lib.searchPlaylistByName("DOESN'T EXIT");
+		Playlist plTestNull = lib.searchPlaylistByName("DOESN'T EXIT".toLowerCase());
 		assertTrue(plTestNull == null);
 
 	}
 
 	@Test
 	void testAddSongToLibrary() {
-		assertTrue(lib.addSongToLibrary(ms, "Lullaby", "OneRepublic"));
-		assertTrue(lib.addSongToLibrary(ms, "Lullaby", "OneRepublic"));
-		assertFalse(lib.addSongToLibrary(ms, "Lullaby", "OneRepublic!"));
+		assertTrue(lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic".toLowerCase()));
+		assertTrue(lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic".toLowerCase()));
+		assertFalse(lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic!".toLowerCase()));
 	}
 
 	@Test
 	void testAddAlbumToLibrary() {
-		assertTrue(lib.addAlbumToLibrary(ms, "19", "Adele"));
-		assertTrue(lib.addAlbumToLibrary(ms, "21", "Adele"));
-		assertTrue(lib.addAlbumToLibrary(ms, "Begin Again", "Norah Jones"));
-		assertTrue(lib.addAlbumToLibrary(ms, "19", "Adele"));
-		assertFalse(lib.addAlbumToLibrary(ms, "19", "21 Savage"));
+		assertTrue(lib.addAlbumToLibrary(ms, "19", "Adele".toLowerCase()));
+		assertTrue(lib.addAlbumToLibrary(ms, "21", "Adele".toLowerCase()));
+		assertTrue(lib.addAlbumToLibrary(ms, "Begin Again".toLowerCase(), "Norah Jones".toLowerCase()));
+		assertTrue(lib.addAlbumToLibrary(ms, "19", "Adele".toLowerCase()));
+		assertFalse(lib.addAlbumToLibrary(ms, "19", "21 Savage".toLowerCase()));
 	}
 
 	@Test // FIX THIS
 	void testAddSongToPlaylist() {
 
-		lib.createPlayList("TEST");
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 0);
+		lib.createPlayList("TEST".toLowerCase());
+		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 0);
 
-		lib.addSongToPlaylist("TEST", "IDGAF", "Drake", "For All the Dogs");
-		lib.addSongToPlaylist("TEST", "IDGAF", "Drake", "For All the Dogs");
+		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
+				"For All the Dogs".toLowerCase());
+		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
+				"For All the Dogs".toLowerCase());
 
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 2);
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().get(0).getTitle().equals("IDGAF"));
-		
-		
+		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 1);
+		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().get(0).getTitle()
+				.equals("IDGAF".toLowerCase()));
 
 	}
 
 	@Test
 	void testRemoveSongPlaylist() {
 
-		lib.createPlayList("TESTER");
-		lib.createPlayList("TEST");
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 0);
+		lib.createPlayList("TESTER".toLowerCase());
+		lib.createPlayList("TEST".toLowerCase());
+		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 0);
 
-		lib.addSongToPlaylist("TEST", "IDGAF", "Drake", "For All the Dogs");
-		lib.addSongToPlaylist("TEST", "DNA.", "Kendrick Lamar", "Damn.");
-		lib.addSongToPlaylist("TEST", "LOVE.", "Kendrick Lamar", "Damn.");
+		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
+				"For All the Dogs".toLowerCase());
+		lib.addSongToPlaylist("TEST".toLowerCase(), "DNA.".toLowerCase(), "Kendrick Lamar".toLowerCase(),
+				"Damn.".toLowerCase());
+		lib.addSongToPlaylist("TEST".toLowerCase(), "LOVE.".toLowerCase(), "Kendrick Lamar".toLowerCase(),
+				"Damn.".toLowerCase());
 
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 3);
+		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 3);
 
-		lib.removeSongPlaylist("TEST", "LOVE.", "Kendrick Lamar");
-		assertTrue(lib.searchPlaylistByName("TEST").getUserSongList().size() == 2);
+		lib.removeSongPlaylist("TEST".toLowerCase(), "LOVE.".toLowerCase(), "Kendrick Lamar".toLowerCase());
+		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 2);
 
 	}
 

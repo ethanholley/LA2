@@ -8,14 +8,18 @@ public class Album {
 	private String artist;
 	private ArrayList<Song> songList;
 
-	// Regular Constructor
+	/*
+	 * Regular Constructor
+	 */
 	public Album(String album, String artist, ArrayList<Song> songList) {
 		this.album = album;
 		this.artist = artist;
 		this.songList = songList;
 	}
 
-	// COPY CONSRUCTOR
+	/*
+	 * COPY CONSRUCTOR
+	 */
 	public Album(Album other) {
 		this.album = other.album;
 		this.artist = other.artist;
@@ -38,7 +42,11 @@ public class Album {
 		songList.add(song);
 	}
 
-	// returns a copy of songList
+	/*
+	 * returns a copy of songList
+	 * 
+	 * @return ArrayList of all songs in album
+	 */
 	public ArrayList<Song> getSongList() {
 		ArrayList<Song> copy = new ArrayList<>();
 		for (Song song : songList) {
@@ -47,8 +55,6 @@ public class Album {
 		return copy;
 	}
 
-	// NEED TO TEST THIS IN ALBUM TEST
-	@Override
 	public boolean equals(Object o) {
 		if (o == null)
 			return false;

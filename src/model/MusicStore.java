@@ -1,18 +1,19 @@
-
 package model;
 
 import java.util.ArrayList;
 
 public class MusicStore {
-	ArrayList<Song> allSongsList;
-	ArrayList<Album> allAlbumsList;
+	private ArrayList<Song> allSongsList;
+	private ArrayList<Album> allAlbumsList;
 
 	public MusicStore() {
 		this.allSongsList = new ArrayList<Song>();
 		this.allAlbumsList = new ArrayList<Album>();
 	}
 
-	// COPY CONSTRUCTOR
+	/*
+	 * COPY CONSTRUCTOR
+	 */
 	public MusicStore(MusicStore copy) {
 		this.allSongsList = new ArrayList<>();
 		this.allAlbumsList = new ArrayList<>();
@@ -28,7 +29,9 @@ public class MusicStore {
 		}
 	}
 
-	// returns a copy of all the songs in the music store
+	/*
+	 * @returns a copy of all the songs in the music store
+	 */
 	public ArrayList<Song> getSongsMusicStore() {
 		ArrayList<Song> copySongs = new ArrayList<Song>();
 		for (Song song : allSongsList) {
@@ -37,7 +40,9 @@ public class MusicStore {
 		return copySongs;
 	}
 
-	// returns a copy of all the albums in the music store
+	/*
+	 * @returns a copy of all the albums in the music store
+	 */
 	public ArrayList<Album> getAlbumsMusicStore() {
 		ArrayList<Album> copyAlbums = new ArrayList<Album>();
 		for (Album album : allAlbumsList) {
@@ -46,20 +51,28 @@ public class MusicStore {
 		return copyAlbums;
 	}
 
-	// adds a copy of song to the music Songs list
+	/*
+	 * adds a copy of song to the music Songs list
+	 */
 	public void addSong(ArrayList<Song> allSongs) {
 		for (Song song : allSongs) {
 			allSongsList.add(new Song(song));
 		}
 	}
 
-	// creates new album object and adds to allAlbums list
+	/*
+	 * creates new album object and adds to allAlbums list
+	 */
 	public void addAlbum(String albumName, String artist, ArrayList<Song> songList) {
 		allAlbumsList.add(new Album(albumName, artist, songList));
 	}
 
-	// iterates through song list and returns a list of all the songs with that
-	// title
+	/*
+	 * iterates through song list and returns a list of all the songs with that
+	 * title
+	 * 
+	 * @return ArrayList of Songs
+	 */
 	public ArrayList<Song> searchSongbyTitle(String title) {
 		ArrayList<Song> allSongsWithTitle = new ArrayList<Song>();
 		for (Song song : allSongsList) {
@@ -70,7 +83,11 @@ public class MusicStore {
 		return allSongsWithTitle;
 	}
 
-	// iterates through song list and returns a list of the songs by that artist
+	/*
+	 * iterates through song list and returns a list of the songs by that artist
+	 * 
+	 * @returns ArrayList of Songs
+	 */
 	public ArrayList<Song> searchSongbyArtist(String artist) {
 		ArrayList<Song> allSongsByArtist = new ArrayList<Song>();
 		for (Song song : allSongsList) {
@@ -81,8 +98,12 @@ public class MusicStore {
 		return allSongsByArtist;
 	}
 
-	// iterates through albums, returns a deep copy of the album object that matches
-	// the title
+	/*
+	 * iterates through albums, returns a deep copy of the album object that matches
+	 * the title
+	 * 
+	 * @return an album
+	 */
 	public Album searchAlbumTitle(String albumTitle) {
 		for (Album album : allAlbumsList) {
 			if (album.getAlbumName().toLowerCase().equals(albumTitle)) {
@@ -92,7 +113,11 @@ public class MusicStore {
 		return null;
 	}
 
-	// iterates through albums, returns a list of all the albums by the artist
+	/*
+	 * iterates through albums, returns a list of all the albums by the artist
+	 * 
+	 * @return ArrayList of Albums
+	 */
 	public ArrayList<Album> searchAlbumArtist(String artist) {
 		ArrayList<Album> allAlbumsByArtist = new ArrayList<Album>();
 		for (Album album : allAlbumsList) {
@@ -103,7 +128,9 @@ public class MusicStore {
 		return allAlbumsByArtist;
 	}
 
-	// SET RATING
+	/*
+	 * Sets the rating of the given artist and song
+	 */
 	public void setRatingOfSong(String Artist, String Song, Rating rating) {
 		for (Song song : this.allSongsList) {
 			if (song.getArtist().toLowerCase().equals(Artist) && song.getTitle().toLowerCase().equals(Song)) {
@@ -113,7 +140,9 @@ public class MusicStore {
 		}
 	}
 
-	// SET FAV
+	/*
+	 * Sets the song of the given artist and song as a favorite
+	 */
 	public void setFavoriteOfSong(String Artist, String Song) {
 		for (Song song : this.allSongsList) {
 			if (song.getArtist().toLowerCase().equals(Artist) && song.getTitle().toLowerCase().equals(Song)) {

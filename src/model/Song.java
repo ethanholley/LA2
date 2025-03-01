@@ -1,4 +1,3 @@
-
 package model;
 
 public class Song {
@@ -8,7 +7,9 @@ public class Song {
 	private String album;
 	private boolean isFavorite;
 
-	// Regular Constructor
+	/*
+	 * Regular Constructor
+	 */
 	public Song(String title, String artist, String album) {
 		this.title = title;
 		this.artist = artist;
@@ -17,7 +18,9 @@ public class Song {
 		this.isFavorite = false;
 	}
 
-	// COPY CONSTRUCTOR
+	/*
+	 * COPY CONSTRUCTOR
+	 */
 	public Song(Song other) {
 		this.title = other.title;
 		this.artist = other.artist;
@@ -55,7 +58,10 @@ public class Song {
 		return this.isFavorite;
 	}
 
-	public void checkRating() { // checks if the song is rated a five and marks it as a favorite
+	/*
+	 * checks if the song is rated a five and marks it as a favorite
+	 */
+	public void checkRating() {
 		if (this.rating == Rating.FIVE) {
 			setFavorite();
 		}
@@ -64,11 +70,10 @@ public class Song {
 	@Override
 	public String toString() {
 
-		return title + " By: " + artist + " Album: " + album;
+		return title + " " + artist;
 
 	}
 
-	// NEED TO TEST THIS IN ALBUM TEST
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)
