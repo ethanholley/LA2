@@ -191,16 +191,6 @@ public class LibraryModel {
 	/*
 	 * Add's song from a playlist given by the user
 	 */
-
-	public void addSongToPlaylist(String playlistName, String songTitle, String artist, String albumTitle) {
-		for (Playlist playlist : playlistLibrary) {
-			if (playlist.getPlaylistName().toLowerCase().equals(playlistName)) {
-				if (!playlist.getUserSongList().contains(new Song(songTitle, artist, albumTitle))) {
-					playlist.addSongToPlaylist(songTitle, artist, albumTitle);
-				}
-				if (!songLibrary.contains(new Song(songTitle, artist, albumTitle))) {
-					songLibrary.add(new Song(songTitle, artist, albumTitle)); // add song to library if not in list yet
-
 	public void addSongToPlaylist(String playlistName, String songTitle, String artist, String albumTitle,
 			String genre) {
 		for (Playlist playlist : playlistLibrary) {
@@ -209,7 +199,8 @@ public class LibraryModel {
 					playlist.addSongToPlaylist(songTitle, artist, albumTitle, genre);
 				}
 				if (!songLibrary.contains(new Song(songTitle, artist, albumTitle, genre))) {
-					songLibrary.add(new Song(songTitle, artist, albumTitle, genre)); // add song to library if not in																				// list ye
+					songLibrary.add(new Song(songTitle, artist, albumTitle, genre)); // add song to library if not in
+																						// list yet
 				}
 			}
 		}

@@ -173,7 +173,7 @@ public class testLibraryModel {
 		assertTrue(lib.getAllPlayList().size() == 2);
 
 		lib.addSongToPlaylist("Testing".toLowerCase(), "Rumour Has It".toLowerCase(), "Adele".toLowerCase(),
-				"21".toLowerCase());
+				"21".toLowerCase(), "Pop".toLowerCase());
 
 		Playlist plTest = lib.searchPlaylistByName("Testing".toLowerCase());
 
@@ -209,9 +209,9 @@ public class testLibraryModel {
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 0);
 
 		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
-				"For All the Dogs".toLowerCase());
+				"For All the Dogs".toLowerCase(), "Rap".toLowerCase());
 		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
-				"For All the Dogs".toLowerCase());
+				"For All the Dogs".toLowerCase(), "Rap".toLowerCase());
 
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 1);
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().get(0).getTitle()
@@ -227,11 +227,11 @@ public class testLibraryModel {
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 0);
 
 		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
-				"For All the Dogs".toLowerCase());
+				"For All the Dogs".toLowerCase(), "Rap".toLowerCase());
 		lib.addSongToPlaylist("TEST".toLowerCase(), "DNA.".toLowerCase(), "Kendrick Lamar".toLowerCase(),
-				"Damn.".toLowerCase());
+				"Damn.".toLowerCase(), "Rap".toLowerCase());
 		lib.addSongToPlaylist("TEST".toLowerCase(), "LOVE.".toLowerCase(), "Kendrick Lamar".toLowerCase(),
-				"Damn.".toLowerCase());
+				"Damn.".toLowerCase(), "Rap".toLowerCase());
 
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 3);
 

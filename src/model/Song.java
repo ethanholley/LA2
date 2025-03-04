@@ -5,16 +5,18 @@ public class Song {
 	private String artist;
 	private Rating rating;
 	private String album;
+	private Genre genre;
 	private boolean isFavorite;
 
 	/*
 	 * Regular Constructor
 	 */
-	public Song(String title, String artist, String album) {
+	public Song(String title, String artist, String album, String genre) {
 		this.title = title;
 		this.artist = artist;
 		this.album = album;
 		this.rating = rating.ZERO;
+		this.genre = Genre.fromString(genre);
 		this.isFavorite = false;
 	}
 

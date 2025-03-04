@@ -1,28 +1,41 @@
 package model;
 
 public enum Genre {
-	POP, ALTERNATIVE, TRADITIONALCOUNTRY, LATIN, ROCK, SINGERSONGWRITER;
-
-	Genre() {
-		// TODO Auto-generated constructor stub
-
-	}
-
-	Genre fromString(String genre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Genre getGenre() {
-		return this.getGenre();
-	}
-
-	public boolean isEquals(Genre other) {
+   ALTERNATIVE("Alternative"),
+   POP("Pop"),
+   SINGER_SONGWRITER("Singer/Songwriter"),
+   TRADITIONAL_COUNTRY("Traditional Country"),
+   ROCK("Rock"),
+   LATIN("Latin");
+	
+   private final String displayName;
+   Genre(String displayName) {  // constructor
+       this.displayName = displayName;
+   }
+   public String getDisplayName() {  // getter
+       return displayName;
+   }
+  
+   public static Genre fromString(String input) {
+       if (input == null) {
+           return null;
+       }
+       for (Genre genre : Genre.values()) {
+           if (genre.name().toLowerCase().replace("_", "-").equalsIgnoreCase(input.toLowerCase())) {
+               return genre;
+           }
+       }
+       return null; // Return null if no match is found
+   }
+  
+   public boolean isEquals(Genre other) {
 		if (other == null)
 			return false;
 		else if (other == this)
 			return true;
 		else
-			return this.getGenre() == other.getGenre();
+			return this.getDisplayName() == other.getDisplayName();
 	}
 }
+
+
