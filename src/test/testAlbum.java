@@ -28,7 +28,7 @@ public class testAlbum {
 
 	@Test
 	void testAddSong() {
-		Song song = new Song("Love", "Kendrick Lamar", "Damn.");
+		Song song = new Song("Love", "Kendrick Lamar", "Damn.", "Rap");
 		album.addSong(song);
 
 		ArrayList<Song> songList = album.getSongList();
@@ -36,17 +36,18 @@ public class testAlbum {
 		assertTrue(songList.contains(song));
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	@Test
 	void testEquals() {
 		assertFalse(album.equals(null));
 		assertTrue(album.equals(album));
-		assertFalse(album.equals(new Song("HELLO", "WORLD", "IDC")));
+		assertFalse(album.equals(new Song("HELLO", "WORLD", "IDC", "Rap")));
 
 		Album copy = new Album(album.getAlbumName(), album.getArtist(), album.getSongList());
 
 		assertTrue(album.equals(copy));
 
-		Song song = new Song("Love", "Kendrick Lamar", "Damn.");
+		Song song = new Song("Love", "Kendrick Lamar", "Damn.", "Rap");
 		album.addSong(song);
 
 		copy.getSongList().remove(0);
@@ -60,9 +61,9 @@ public class testAlbum {
 	private Album kendricksAlbum() {
 
 		ArrayList<Song> kenSongList = new ArrayList<Song>();
-		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn."));
-		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn."));
-		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn."));
+		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn.", "Rap"));
+		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn.", "Rap"));
+		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn.", "Rap"));
 
 		return new Album("Damn.", "Kendrick Lamar", kenSongList);
 	}

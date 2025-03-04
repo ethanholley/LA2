@@ -60,6 +60,7 @@ public class ParseFile {
 
 		String artist = "";
 		String albumName = "";
+		String genreType = "";
 
 		ArrayList<Song> songList = new ArrayList<>();
 
@@ -77,11 +78,12 @@ public class ParseFile {
 
 					artist += split[1]; // Extract artist name
 					albumName += split[0]; // Extract album name
+					genreType += split[2];
 
 					firstLine = false;
 				} else {
 					// Add song to the list with extracted artist name
-					songList.add(new Song(line, artist, albumName));
+					songList.add(new Song(line, artist, albumName, genreType));
 				}
 			}
 
