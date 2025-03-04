@@ -6,16 +6,19 @@ public class Song {
 	private Rating rating;
 	private String album;
 	private boolean isFavorite;
+	private Genre genre;
 
 	/*
 	 * Regular Constructor
 	 */
-	public Song(String title, String artist, String album) {
+	public Song(String title, String artist, String album, String genre) {
 		this.title = title;
 		this.artist = artist;
 		this.album = album;
 		this.rating = rating.ZERO;
 		this.isFavorite = false;
+
+//		 this.genre = Genre.fromString(genre);
 	}
 
 	/*
@@ -43,6 +46,10 @@ public class Song {
 
 	public Rating getRating() {
 		return rating;
+	}
+
+	public Genre getGenre() {
+		return this.genre;
 	}
 
 	public void setRating(Rating rating) {
@@ -85,7 +92,7 @@ public class Song {
 		else {
 			return this.title.equals(((Song) o).title) && this.artist.equals(((Song) o).artist)
 					&& this.album.equals(((Song) o).album) && this.rating.equals(((Song) o).rating)
-					&& this.isFavorite == ((Song) o).isFavorite;
+					&& this.isFavorite == ((Song) o).isFavorite && this.genre == ((Song) o).getGenre();
 		}
 	}
 }

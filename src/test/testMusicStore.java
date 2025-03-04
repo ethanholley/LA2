@@ -29,7 +29,7 @@ public class testMusicStore {
 	@Test
 	void testAddSong() {
 
-		Song song1 = new Song("IDGAF", "Drake", "For All the Dogs");
+		Song song1 = new Song("IDGAF", "Drake", "For All the Dogs", "Rap");
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(song1);
 
@@ -58,7 +58,7 @@ public class testMusicStore {
 	@Test
 	void testSearchSongbyTitle() {
 		ArrayList<Song> song = ms.searchSongbyTitle("Chasing Pavements".toLowerCase());
-		Song adeleSong = new Song("Chasing Pavements", "Adele", "19");
+		Song adeleSong = new Song("Chasing Pavements", "Adele", "19", "Pop");
 
 		assertTrue(song.get(0).equals(adeleSong));
 
@@ -75,7 +75,7 @@ public class testMusicStore {
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 		ArrayList<Song> dnaSong = ms.searchSongbyArtist("Kendrick Lamar".toLowerCase());
 
-		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.");
+		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.", "Rap");
 
 		assertTrue(dnaSong.contains(copyDNA));
 
@@ -158,9 +158,9 @@ public class testMusicStore {
 	private Album kendricksAlbum() {
 
 		ArrayList<Song> kenSongList = new ArrayList<Song>();
-		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn."));
-		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn."));
-		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn."));
+		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn.", "Rap"));
+		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn.", "Rap"));
+		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn.", "Rap"));
 
 		return new Album("Damn.", "Kendrick Lamar", kenSongList);
 	}

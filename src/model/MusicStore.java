@@ -3,8 +3,8 @@ package model;
 import java.util.ArrayList;
 
 public class MusicStore {
-	ArrayList<Song> allSongsList;
-	ArrayList<Album> allAlbumsList;
+	private ArrayList<Song> allSongsList;
+	private ArrayList<Album> allAlbumsList;
 
 	public MusicStore() {
 		this.allSongsList = new ArrayList<Song>();

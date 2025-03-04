@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class testSong {
 
-	Song song = new Song("DNA", "Kendrick Lamar", "Damn.");
+	Song song = new Song("DNA", "Kendrick Lamar", "Damn.", "Rap");
 	private Rating rating = null;
 
 	@Test
@@ -65,7 +65,7 @@ public class testSong {
 	@Test
 	void testSetFavorite() {
 
-		Song song = new Song("IDGAF", "Drake", "Boys");
+		Song song = new Song("IDGAF", "Drake", "Boys", "Rap");
 		assertFalse(song.isFavorite());
 		song.setFavorite();
 		assertTrue(song.isFavorite() == true);
@@ -79,7 +79,7 @@ public class testSong {
 
 	@Test
 	void testCheckRating() {
-		Song song = new Song("IDGAF", "Drake", "Boys");
+		Song song = new Song("IDGAF", "Drake", "Boys", "Rap");
 		song.setRating(Rating.FIVE);
 		song.checkRating();
 
@@ -89,9 +89,10 @@ public class testSong {
 	@Test
 	void testEquals() {
 		// Song song = new Song("DNA", "Kendrick Lamar", "Damn.");
-		Song songCopyTitle = new Song("DNA", "Hello", "World");
-		Song songCopyArtist = new Song("DNA", "Kendrick Lamar", "World");
-		Song songCopyAlbumn = new Song("DNA", "Kendrick Lamar", "Damn.");
+		Song songCopyTitle = new Song("DNA", "Hello", "World", "Name");
+		Song songCopyArtist = new Song("DNA", "Kendrick Lamar", "World", "Name");
+		Song songCopyAlbumn = new Song("DNA", "Kendrick Lamar", "Damn.", "Name");
+		Song songCopyGenre = new Song("DNA", "Kendrick Lamar", "Damn.", "Rap");
 
 		assertFalse(song.equals(null));
 		assertTrue(song.equals(song));
@@ -109,8 +110,9 @@ public class testSong {
 		assertFalse(song.equals(songCopyTitle));
 
 		song.setRating(rating.FIVE);
+		songCopyGenre.setRating(rating.FIVE);
 
-		assertTrue(song.equals(songCopyAlbumn));
+		assertTrue(song.equals(songCopyGenre));
 
 	}
 
