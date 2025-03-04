@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import model.Album;
+import model.Genre;
 import model.Song;
 
 public class testAlbum {
@@ -28,7 +29,7 @@ public class testAlbum {
 
 	@Test
 	void testAddSong() {
-		Song song = new Song("Love", "Kendrick Lamar", "Damn.", "Rap");
+		Song song = new Song("Love", "Kendrick Lamar", "Damn.", Genre.POP);
 		album.addSong(song);
 
 		ArrayList<Song> songList = album.getSongList();
@@ -41,13 +42,13 @@ public class testAlbum {
 	void testEquals() {
 		assertFalse(album.equals(null));
 		assertTrue(album.equals(album));
-		assertFalse(album.equals(new Song("HELLO", "WORLD", "IDC", "Rap")));
+		assertFalse(album.equals(new Song("HELLO", "WORLD", "IDC", Genre.POP)));
 
 		Album copy = new Album(album.getAlbumName(), album.getArtist(), album.getSongList());
 
 		assertTrue(album.equals(copy));
 
-		Song song = new Song("Love", "Kendrick Lamar", "Damn.", "Rap");
+		Song song = new Song("Love", "Kendrick Lamar", "Damn.", Genre.POP);
 		album.addSong(song);
 
 		copy.getSongList().remove(0);
@@ -61,9 +62,9 @@ public class testAlbum {
 	private Album kendricksAlbum() {
 
 		ArrayList<Song> kenSongList = new ArrayList<Song>();
-		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn.", "Rap"));
-		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn.", "Rap"));
-		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn.", "Rap"));
+		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn.", Genre.POP));
+		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn.", Genre.POP));
+		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn.", Genre.POP));
 
 		return new Album("Damn.", "Kendrick Lamar", kenSongList);
 	}

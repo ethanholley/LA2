@@ -192,7 +192,7 @@ public class LibraryModel {
 	 * Add's song from a playlist given by the user
 	 */
 	public void addSongToPlaylist(String playlistName, String songTitle, String artist, String albumTitle,
-			String genre) {
+			Genre genre) {
 		for (Playlist playlist : playlistLibrary) {
 			if (playlist.getPlaylistName().equals(playlistName)) {
 				if (!playlist.getUserSongList().contains(new Song(songTitle, artist, albumTitle, genre))) {

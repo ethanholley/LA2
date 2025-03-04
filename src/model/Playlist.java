@@ -48,7 +48,7 @@ public class Playlist {
 	 * adds a song to the playlist, avoids escape reference by passing in string
 	 * arguments
 	 */
-	public void addSongToPlaylist(String title, String artist, String album, String genre) {
+	public void addSongToPlaylist(String title, String artist, String album, Genre genre) {
 		if (!userSongList.contains(new Song(title, artist, album, genre))) {
 			userSongList.add(new Song(title, artist, album, genre));
 		}

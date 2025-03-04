@@ -1,6 +1,7 @@
 
 package test;
 
+import model.Genre;
 import model.Rating;
 import model.Song;
 
@@ -12,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 public class testSong {
 
-	Song song = new Song("DNA", "Kendrick Lamar", "Damn.", "Rap");
+	Song song = new Song("DNA", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE);
 	private Rating rating = null;
 
 	@Test
@@ -66,7 +67,7 @@ public class testSong {
 	@Test
 	void testSetFavorite() {
 
-		Song song = new Song("IDGAF", "Drake", "Boys", "Rap");
+		Song song = new Song("IDGAF", "Drake", "Boys", Genre.ALTERNATIVE);
 		assertFalse(song.isFavorite());
 		song.setFavorite();
 		assertTrue(song.isFavorite() == true);
@@ -80,7 +81,7 @@ public class testSong {
 
 	@Test
 	void testCheckRating() {
-		Song song = new Song("IDGAF", "Drake", "Boys", "Rap");
+		Song song = new Song("IDGAF", "Drake", "Boys", Genre.ALTERNATIVE);
 		song.setRating(Rating.FIVE);
 		song.checkRating();
 
@@ -90,10 +91,10 @@ public class testSong {
 	@Test
 	void testEquals() {
 		// Song song = new Song("DNA", "Kendrick Lamar", "Damn.");
-		Song songCopyTitle = new Song("DNA", "Hello", "World", "Name");
-		Song songCopyArtist = new Song("DNA", "Kendrick Lamar", "World", "Name");
-		Song songCopyAlbumn = new Song("DNA", "Kendrick Lamar", "Damn.", "Name");
-		Song songCopyGenre = new Song("DNA", "Kendrick Lamar", "Damn.", "Rap");
+		Song songCopyTitle = new Song("DNA", "Hello", "World", Genre.ALTERNATIVE);
+		Song songCopyArtist = new Song("DNA", "Kendrick Lamar", "World", Genre.ALTERNATIVE);
+		Song songCopyAlbumn = new Song("DNA", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE);
+		Song songCopyGenre = new Song("DNA", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE);
 
 		assertFalse(song.equals(null));
 		assertTrue(song.equals(song));

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import model.Album;
+import model.Genre;
 import model.MusicStore;
 import model.Song;
 import model.ParseFile;
@@ -30,7 +31,7 @@ public class testMusicStore {
 	@Test
 	void testAddSong() {
 
-		Song song1 = new Song("IDGAF", "Drake", "For All the Dogs", "Rap");
+		Song song1 = new Song("IDGAF", "Drake", "For All the Dogs", Genre.ALTERNATIVE);
 		ArrayList<Song> songList = new ArrayList<Song>();
 		songList.add(song1);
 
@@ -59,7 +60,7 @@ public class testMusicStore {
 	@Test
 	void testSearchSongbyTitle() {
 		ArrayList<Song> song = ms.searchSongbyTitle("Chasing Pavements".toLowerCase());
-		Song adeleSong = new Song("Chasing Pavements", "Adele", "19", "Pop");
+		Song adeleSong = new Song("Chasing Pavements", "Adele", "19", Genre.POP);
 
 		assertTrue(song.get(0).equals(adeleSong));
 
@@ -76,7 +77,7 @@ public class testMusicStore {
 		ms.addAlbum("Damn.", "Kendrick Lamar", kensAlbum.getSongList());
 		ArrayList<Song> dnaSong = ms.searchSongbyArtist("Kendrick Lamar".toLowerCase());
 
-		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.", "Rap");
+		Song copyDNA = new Song("DNA.", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE);
 
 		assertTrue(dnaSong.contains(copyDNA));
 
@@ -159,9 +160,9 @@ public class testMusicStore {
 	private Album kendricksAlbum() {
 
 		ArrayList<Song> kenSongList = new ArrayList<Song>();
-		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn.", "Rap"));
-		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn.", "Rap"));
-		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn.", "Rap"));
+		kenSongList.add(new Song("Feel.", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE));
+		kenSongList.add(new Song("Pride.", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE));
+		kenSongList.add(new Song("DNA.", "Kendrick Lamar", "Damn.", Genre.ALTERNATIVE));
 
 		return new Album("Damn.", "Kendrick Lamar", kenSongList);
 	}

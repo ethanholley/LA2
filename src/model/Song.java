@@ -11,12 +11,12 @@ public class Song {
 	/*
 	 * Regular Constructor
 	 */
-	public Song(String title, String artist, String album, String genre) {
+	public Song(String title, String artist, String album, Genre genre) {
 		this.title = title;
 		this.artist = artist;
 		this.album = album;
 		this.rating = rating.ZERO;
-		this.genre = Genre.fromString(genre);
+		this.genre = genre;
 		this.isFavorite = false;
 	}
 
@@ -28,6 +28,7 @@ public class Song {
 		this.artist = other.artist;
 		this.album = other.album;
 		this.rating = other.rating;
+		this.genre = other.genre;
 		this.isFavorite = other.isFavorite;
 	}
 
@@ -45,6 +46,10 @@ public class Song {
 
 	public Rating getRating() {
 		return rating;
+	}
+	
+	public Genre getGenre() {
+		return this.genre;
 	}
 
 	public void setRating(Rating rating) {

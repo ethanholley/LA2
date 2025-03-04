@@ -83,7 +83,8 @@ public class ParseFile {
 					firstLine = false;
 				} else {
 					// Add song to the list with extracted artist name
-					songList.add(new Song(line, artist, albumName, genreType));
+					Genre genre = Genre.fromString(genreType);
+					songList.add(new Song(line, artist, albumName, genre));
 				}
 			}
 

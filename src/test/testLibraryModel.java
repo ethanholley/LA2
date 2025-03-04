@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import model.Album;
+import model.Genre;
 import model.LibraryModel;
 import model.MusicStore;
 import model.ParseFile;
@@ -173,7 +174,7 @@ public class testLibraryModel {
 		assertTrue(lib.getAllPlayList().size() == 2);
 
 		lib.addSongToPlaylist("Testing".toLowerCase(), "Rumour Has It".toLowerCase(), "Adele".toLowerCase(),
-				"21".toLowerCase(), "Pop".toLowerCase());
+				"21".toLowerCase(), Genre.POP);
 
 		Playlist plTest = lib.searchPlaylistByName("Testing".toLowerCase());
 
@@ -209,9 +210,9 @@ public class testLibraryModel {
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 0);
 
 		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
-				"For All the Dogs".toLowerCase(), "Rap".toLowerCase());
+				"For All the Dogs".toLowerCase(), Genre.TRADITIONAL_COUNTRY);
 		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
-				"For All the Dogs".toLowerCase(), "Rap".toLowerCase());
+				"For All the Dogs".toLowerCase(), Genre.TRADITIONAL_COUNTRY);
 
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 1);
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().get(0).getTitle()
@@ -227,11 +228,11 @@ public class testLibraryModel {
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 0);
 
 		lib.addSongToPlaylist("TEST".toLowerCase(), "IDGAF".toLowerCase(), "Drake".toLowerCase(),
-				"For All the Dogs".toLowerCase(), "Rap".toLowerCase());
+				"For All the Dogs".toLowerCase(), Genre.TRADITIONAL_COUNTRY);
 		lib.addSongToPlaylist("TEST".toLowerCase(), "DNA.".toLowerCase(), "Kendrick Lamar".toLowerCase(),
-				"Damn.".toLowerCase(), "Rap".toLowerCase());
+				"Damn.".toLowerCase(), Genre.TRADITIONAL_COUNTRY);
 		lib.addSongToPlaylist("TEST".toLowerCase(), "LOVE.".toLowerCase(), "Kendrick Lamar".toLowerCase(),
-				"Damn.".toLowerCase(), "Rap".toLowerCase());
+				"Damn.".toLowerCase(), Genre.TRADITIONAL_COUNTRY);
 
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 3);
 

@@ -176,7 +176,7 @@ public class Main {
 									"Great! Adding " + song.getTitle() + " to " + playlist.getPlaylistName() + "!");
 							System.out.println("Going back to main menu");
 							lib.addSongToPlaylist(playlist.getPlaylistName().toLowerCase(), song.getTitle(),
-									song.getArtist(), song.getAlbum());
+									song.getArtist(), song.getAlbum(), song.getGenre());
 							// mainMenu();
 							break;
 						}
@@ -247,7 +247,7 @@ public class Main {
 								System.out.println("Going back to main menu");
 								lib.addSongToPlaylist(playlist.getPlaylistName().toLowerCase(),
 										songList.get(0).getTitle(), songList.get(0).getArtist(),
-										songList.get(0).getAlbum());
+										songList.get(0).getAlbum(), songList.get(0).getGenre());
 								mainMenu();
 								break;
 							}
@@ -327,7 +327,7 @@ public class Main {
 										+ playlist.getPlaylistName() + "!");
 								System.out.println("Going back to main menu");
 								lib.addSongToPlaylist(playlist.getPlaylistName().toLowerCase(), chosenSong.getTitle(),
-										chosenSong.getArtist(), chosenSong.getAlbum());
+										chosenSong.getArtist(), chosenSong.getAlbum(), chosenSong.getGenre());
 								mainMenu();
 								break;
 							}
@@ -766,7 +766,7 @@ public class Main {
 			if (!found) {
 				System.out.println("Playlist not created. Create Playlist at main menu.\n\n");
 			} else {
-				lib.addSongToPlaylist(playlistName, song.getTitle(), song.getArtist(), song.getAlbum());
+				lib.addSongToPlaylist(playlistName, song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
 				System.out.println("Successfully added!\n");
 			}
 		} else {

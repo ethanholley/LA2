@@ -17,16 +17,16 @@ public enum Genre {
    }
   
    public static Genre fromString(String input) {
-       if (input == null) {
-           return null;
-       }
-       for (Genre genre : Genre.values()) {
-           if (genre.name().toLowerCase().replace("_", "-").equalsIgnoreCase(input.toLowerCase())) {
-               return genre;
-           }
-       }
-       return null; // Return null if no match is found
-   }
+	    if (input == null) {
+	        return null;
+	    }
+	    for (Genre genre : Genre.values()) {
+	        if (genre.getDisplayName().equalsIgnoreCase(input)) { // Compare with displayName
+	            return genre;
+	        }
+	    }
+	    return null; // Return null if no match is found
+	}
   
    public boolean isEquals(Genre other) {
 		if (other == null)
