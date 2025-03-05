@@ -131,9 +131,9 @@ public class MusicStore {
 	/*
 	 * Sets the rating of the given artist and song
 	 */
-	public void setRatingOfSong(String Artist, String Song, Rating rating) {
-		for (Song song : this.allSongsList) {
-			if (song.getArtist().toLowerCase().equals(Artist) && song.getTitle().toLowerCase().equals(Song)) {
+	public void setRatingOfSong(String artist, String title, Rating rating) {
+		for (Song song : allSongsList) {
+			if (song.getArtist().toLowerCase().equals(artist) && song.getTitle().toLowerCase().equals(title)) {
 				song.setRating(rating);
 				break;
 			}

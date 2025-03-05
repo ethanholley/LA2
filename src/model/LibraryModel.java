@@ -46,6 +46,15 @@ public class LibraryModel {
 		return songTitles;
 
 	}
+	
+	// returns a deep copy of all the songs in the library
+	public ArrayList<Song> getAllSongs(){
+		ArrayList<Song> allSongs = new ArrayList<Song>();
+		for (Song song: songLibrary) {
+			allSongs.add(new Song(song));
+		}
+		return allSongs;
+	}
 
 	/*
 	 * gets a deep copy of the list of the albums from the library
@@ -159,7 +168,7 @@ public class LibraryModel {
 		for (Song song : ms.getSongsMusicStore()) { // iterate over songs in music store that are available
 			if (song.getTitle().toLowerCase().equals(title) && song.getArtist().toLowerCase().equals(artist)) {
 				if (!songLibrary.contains(song)) {
-					songLibrary.add(new Song(song)); // add song to library if not in list yet
+					songLibrary.add(song); // add song to library if not in list yet
 				}
 				return true;
 			}
@@ -177,7 +186,7 @@ public class LibraryModel {
 					&& album.getArtist().toLowerCase().equals(artist)) {
 				for (Song song : album.getSongList()) { // add all songs from album to songLibrary
 					if (!songLibrary.contains(song)) {
-						songLibrary.add(song);
+						songLibrary.add(new Song(song));
 					}
 				}
 				albumLibrary.add(new Album(album));

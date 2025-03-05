@@ -3,6 +3,8 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 import model.*;
 
@@ -446,6 +448,7 @@ public class Main {
 			int ratingValue = Integer.parseInt(userInput); // Convert to integer
 			Rating rating = getRatingFromValue(ratingValue); // Convert to enum
 			if (rating != null) {
+				ms.setRatingOfSong(song.getArtist().toLowerCase(), song.getTitle().toLowerCase(), rating);
 				song.setRating(rating);
 				System.out.println("You rated the song: " + rating + " - " + song.getTitle() + " By: "
 						+ song.getArtist() + ", " + song.getAlbum() + " Rating: " + song.getRating());
@@ -454,6 +457,16 @@ public class Main {
 							+ song.getArtist() + " to favorite songs in music library.\n");
 					ms.setFavoriteOfSong(song.getArtist().toLowerCase(), song.getTitle().toLowerCase());
 					lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
+				} else {
+					System.out.println("Do you want to add this song to your music library? Yes or No?");
+					scanner2 = new Scanner(System.in);
+					userInput = scanner2.nextLine().toLowerCase();
+					if (userInput.equals("yes")) {
+						System.out.println("Great! " + song.getTitle() + " By: " + song.getArtist() + " will be added to your library.\n");
+						lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
+					} else {
+						System.out.println("Answer was not yes, returning to main menu...\n");
+					}
 				}
 				mainMenu();
 			} else {
@@ -512,17 +525,45 @@ public class Main {
 			listAllPlaylists();
 			mainMenu();
 		} else if (userInput.equals("songs")) {
-			ArrayList<String> allSongs = lib.getSongTitles();
+			ArrayList<Song> allSongs = lib.getAllSongs();
 			if (allSongs.size() == 0) {
 				System.out.println(
 						"You haven't added any songs to your library. Returning to main menu and navigate to add songs.\n\n");
 				mainMenu();
 			} else {
-				System.out.println("All Songs in Your Library:\n");
-				for (String song : allSongs) {
-					System.out.println(song);
+				System.out.println("How do you want your songs listed in order:\n");
+				System.out.println("Song Title   Artist   Rating");
+				scanner = new Scanner(System.in);
+				userInput = scanner.nextLine().toLowerCase();
+				if (userInput.equals("song title")){
+					ArrayList<String> allSongTitles = lib.getSongTitles();
+					Collections.sort(allSongTitles);
+					for (String song : allSongTitles) {
+						System.out.println(song);
+					}
+					System.out.println("\nGoing back to main menu...\n");
+					mainMenu();
+				} else if(userInput.equals("artist")){
+					Collections.sort(allSongs, Comparator.comparing(Song::getArtist));
+					for (Song song: allSongs) {
+						System.out.println("Song Title: " + song.getTitle() + "  Artist: " + song.getArtist() + ", Album: " + song.getAlbum());
+					}
+					System.out.println("\nGoing back to main menu...\n");
+					mainMenu();
+				} else if(userInput.equals("rating")){
+					Collections.sort(allSongs, Comparator.comparing(Song:: getRating)); // sort by rating in ascending order
+					for (Song song: allSongs) {
+						if (song.getRating() == Rating.ZERO) {
+							System.out.println("Song Title: " + song.getTitle() + "  Artist: " + song.getArtist() + ", Album: " + song.getAlbum() 
+							+ " Rating: Song not Rated");
+						} else {
+							System.out.println("Song Title: " + song.getTitle() + "  Artist: " + song.getArtist() + ", Album: " + song.getAlbum() 
+							+ " Rating: " + song.getRating());
+						}
+					}
 				}
 			}
+			System.out.println();
 			mainMenu();
 		} else if (userInput.equals("albums")) {
 			ArrayList<Album> allAlbums = lib.getAlbumList();

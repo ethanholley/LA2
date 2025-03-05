@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 public class Song {
 	private String title;
 	private String artist;
@@ -80,7 +82,7 @@ public class Song {
 		return title + " " + artist;
 
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)
