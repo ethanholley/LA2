@@ -117,5 +117,10 @@ public class testSong {
 		assertTrue(song.equals(songCopyGenre));
 
 	}
+	
+	@Test
+	void testGetGenre() {
+		assertTrue(this.song.getGenre().isEquals(Genre.ALTERNATIVE));
+	}
 
 }

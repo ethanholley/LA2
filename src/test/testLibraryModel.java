@@ -20,7 +20,7 @@ import model.Song;
 public class testLibraryModel {
 
 	LibraryModel lib = new LibraryModel();
-	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
+	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
 	MusicStore ms = pf.getMusicStore();
 
 	@Test
@@ -238,6 +238,60 @@ public class testLibraryModel {
 
 		lib.removeSongPlaylist("TEST".toLowerCase(), "LOVE.".toLowerCase(), "Kendrick Lamar".toLowerCase());
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 2);
+
+	}
+
+	@Test
+	void testGetAllSongs() {
+		lib.addAlbumToLibrary(ms, "21", "adele");
+		assertTrue(this.lib.getAllSongs().size() == 12);
+	}
+
+	@Test
+	void testGetSongByGenre() {
+		lib.addAlbumToLibrary(ms, "21", "adele");
+		lib.addAlbumToLibrary(ms, "sons", "the heavy");
+		lib.addAlbumToLibrary(ms, "boys & girls", "alabama shakes");
+
+		ArrayList<Song> songListAlt = lib.getSongsByGenre("alTernative");
+		assertTrue(songListAlt.size() == 12);
+
+		ArrayList<Song> songListPop = lib.getSongsByGenre("POp");
+		assertTrue(songListPop.size() == 12);
+
+		ArrayList<Song> songListRock = lib.getSongsByGenre("ROCK");
+		assertTrue(songListRock.size() == 11);
+
+		ArrayList<Song> songListNull = lib.getSongsByGenre("nothing");
+		assertTrue(songListNull.size() == 0);
+
+		ArrayList<Song> songListNone = lib.getSongsByGenre("Latin");
+		assertTrue(songListNone.size() == 0);
+
+	}
+
+	@Test
+	void testgetGenreList() {
+
+		ArrayList<String> genreList = lib.getGenreList();
+		assertTrue(genreList.size() == 0);
+
+		lib.addAlbumToLibrary(ms, "21", "adele");
+
+		genreList = lib.getGenreList();
+		assertTrue(genreList.size() == 1);
+
+		lib.addAlbumToLibrary(ms, "sons", "the heavy");
+
+		genreList = lib.getGenreList();
+		assertTrue(genreList.size() == 2);
+
+		lib.addAlbumToLibrary(ms, "boys & girls", "alabama shakes");
+
+		genreList = lib.getGenreList();
+		System.out.println(genreList.toString());
+
+		assertTrue(genreList.size() == 3);
 
 	}
 

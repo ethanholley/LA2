@@ -46,11 +46,11 @@ public class LibraryModel {
 		return songTitles;
 
 	}
-	
+
 	// returns a deep copy of all the songs in the library
-	public ArrayList<Song> getAllSongs(){
+	public ArrayList<Song> getAllSongs() {
 		ArrayList<Song> allSongs = new ArrayList<Song>();
-		for (Song song: songLibrary) {
+		for (Song song : songLibrary) {
 			allSongs.add(new Song(song));
 		}
 		return allSongs;
@@ -91,6 +91,21 @@ public class LibraryModel {
 			}
 		}
 		return artistList;
+	}
+
+	/*
+	 * returns a string array list of all the genres in the music library
+	 */
+	public ArrayList<String> getGenreList() {
+
+		ArrayList<String> genreList = new ArrayList<String>();
+
+		for (Song song : this.songLibrary) {
+			if (!genreList.contains(song.getGenre().toString().toLowerCase())) {
+				genreList.add(song.getGenre().toString().toLowerCase());
+			}
+		}
+		return genreList;
 	}
 
 	/*
@@ -224,5 +239,18 @@ public class LibraryModel {
 				playlist.removeSongFromPlaylist(songTitle, artist);
 			}
 		}
+	}
+
+	public ArrayList<Song> getSongsByGenre(String genreName) {
+
+		ArrayList<Song> songList = new ArrayList<Song>();
+
+		for (Song song : this.songLibrary) {
+			Genre genre = Genre.fromString(genreName);
+			if (song.getGenre().isEquals(genre)) {
+				songList.add(new Song(song));
+			}
+		}
+		return songList;
 	}
 }
