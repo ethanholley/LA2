@@ -20,7 +20,7 @@ import model.Song;
 public class testLibraryModel {
 
 	LibraryModel lib = new LibraryModel();
-	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
+	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
 	MusicStore ms = pf.getMusicStore();
 
 	@Test
@@ -62,11 +62,11 @@ public class testLibraryModel {
 	@Test
 	void testGetFavoriteSongs() {
 
-		lib.addSongToLibrary(ms, "Rumour Has It".toLowerCase(), "Adele".toLowerCase());
-		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic".toLowerCase());
-		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "Leonard Cohen".toLowerCase());
-		lib.addSongToLibrary(ms, "After Party".toLowerCase(), "Ozomatli".toLowerCase());
-		lib.addSongToLibrary(ms, "Fire".toLowerCase(), "The Heavy".toLowerCase());
+//		lib.addSongToLibrary(ms, "Rumour Has It".toLowerCase(), "Adele".toLowerCase());
+//		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "OneRepublic".toLowerCase());
+//		lib.addSongToLibrary(ms, "Lullaby".toLowerCase(), "Leonard Cohen".toLowerCase());
+//		lib.addSongToLibrary(ms, "After Party".toLowerCase(), "Ozomatli".toLowerCase());
+//		lib.addSongToLibrary(ms, "Fire".toLowerCase(), "The Heavy".toLowerCase());
 
 		ms.setRatingOfSong("Adele".toLowerCase(), "Rumour Has It".toLowerCase(), Rating.FIVE);
 		ms.setRatingOfSong("OneRepublic".toLowerCase(), "Lullaby".toLowerCase(), Rating.FIVE);
@@ -289,9 +289,31 @@ public class testLibraryModel {
 		lib.addAlbumToLibrary(ms, "boys & girls", "alabama shakes");
 
 		genreList = lib.getGenreList();
-		System.out.println(genreList.toString());
 
 		assertTrue(genreList.size() == 3);
+
+	}
+
+	@Test
+	void testRemoveSongFromLibrary() {
+		this.lib.addAlbumToLibrary(ms, "19", "adele");
+		assertTrue(this.lib.getAllSongs().size() == 12);
+
+		this.lib.removeSongFromLibrary("tired", "adele");
+		assertFalse(this.lib.getAllSongs().size() == 12);
+		assertTrue(this.lib.getAllSongs().size() == 11);
+
+	}
+
+	@Test
+	void testRemoveAlbumFromLibrary() {
+		this.lib.addAlbumToLibrary(ms, "19", "adele");
+		this.lib.addAlbumToLibrary(ms, "21", "adele");
+		assertTrue(this.lib.getAlbumList().size() == 2);
+
+		this.lib.removeAlbumFromLibrary("19");
+		assertFalse(this.lib.getAlbumList().size() == 2);
+		assertTrue(this.lib.getAlbumList().size() == 1);
 
 	}
 

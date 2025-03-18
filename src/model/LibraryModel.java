@@ -183,18 +183,18 @@ public class LibraryModel {
 		for (Song song : ms.getSongsMusicStore()) { // iterate over songs in music store that are available
 			if (song.getTitle().toLowerCase().equals(title) && song.getArtist().toLowerCase().equals(artist)) {
 				boolean songExists = false;
-	            for (Song songs : songLibrary) {
-	                if (songs.getTitle().equalsIgnoreCase(title) && songs.getArtist().equalsIgnoreCase(artist)) {
-	                    songExists = true;
-	                    break;
-	                }
-	            }
-				
-	            if (!songExists) {
+				for (Song songs : songLibrary) {
+					if (songs.getTitle().equalsIgnoreCase(title) && songs.getArtist().equalsIgnoreCase(artist)) {
+						songExists = true;
+						break;
+					}
+				}
+
+				if (!songExists) {
 					songLibrary.add(song); // add song to library if not in list yet
-	            }
-	            return true;
-		}
+				}
+				return true;
+			}
 		}
 		return false;
 	}
@@ -227,23 +227,23 @@ public class LibraryModel {
 		for (Playlist playlist : playlistLibrary) {
 			if (playlist.getPlaylistName().toLowerCase().equals(playlistName.toLowerCase())) {
 				Song newSong = new Song(songTitle, artist, albumTitle, genre);
-				
+
 				if (!playlist.getUserSongList().contains(new Song(songTitle, artist, albumTitle, genre))) {
 					playlist.addSongToPlaylist(songTitle, artist, albumTitle, genre);
 				}
-				
+
 				// Check if song is already in songLibrary
-	            boolean songExists = false;
-	            for (Song song : songLibrary) {
-	                if (song.getTitle().equalsIgnoreCase(songTitle) && song.getArtist().equalsIgnoreCase(artist)) {
-	                    songExists = true;
-	                    break;
-	                }
-	            }
-	            // Only add the song if it was not found
-	            if (!songExists) {
-	                songLibrary.add(newSong);
-	            }
+				boolean songExists = false;
+				for (Song song : songLibrary) {
+					if (song.getTitle().equalsIgnoreCase(songTitle) && song.getArtist().equalsIgnoreCase(artist)) {
+						songExists = true;
+						break;
+					}
+				}
+				// Only add the song if it was not found
+				if (!songExists) {
+					songLibrary.add(newSong);
+				}
 			}
 		}
 	}
@@ -270,5 +270,23 @@ public class LibraryModel {
 			}
 		}
 		return songList;
+	}
+
+	public void removeSongFromLibrary(String title, String artist) {
+		for (Song song : this.songLibrary) {
+			if (song.getTitle().toLowerCase().equals(title) && song.getArtist().toLowerCase().equals(artist)) {
+				this.songLibrary.remove(song);
+				break;
+			}
+		}
+	}
+
+	public void removeAlbumFromLibrary(String albumName) {
+		for (Album album : this.albumLibrary) {
+			if (album.getAlbumName().toLowerCase().equals(albumName)) {
+				this.albumLibrary.remove(album);
+				break;
+			}
+		}
 	}
 }
