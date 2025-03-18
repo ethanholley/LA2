@@ -2,6 +2,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LibraryModel {
 	private ArrayList<Song> songLibrary;
@@ -255,6 +256,7 @@ public class LibraryModel {
 		for (Playlist playlist : playlistLibrary) {
 			if (playlist.getPlaylistName().toLowerCase().equals(playlistName.toLowerCase())) {
 				playlist.removeSongFromPlaylist(songTitle, artist);
+				break;
 			}
 		}
 	}
@@ -288,5 +290,20 @@ public class LibraryModel {
 				break;
 			}
 		}
+	}
+
+	public Song getPlaylistToShufflePlaylist(String playlistName) {
+
+		for (Playlist playlist : this.playlistLibrary) {
+			if (playlist.getPlaylistName().toLowerCase().equals(playlistName)) {
+				return new Song(playlist.shufflePlaylist());
+			}
+		}
+		return null;
+	}
+
+	public Song getSongFromShuffle() {
+		Collections.shuffle(songLibrary);
+		return this.songLibrary.get(0);
 	}
 }

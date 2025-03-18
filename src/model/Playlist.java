@@ -2,6 +2,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Playlist {
 	private ArrayList<Song> userSongList;
@@ -59,11 +60,17 @@ public class Playlist {
 	 */
 	public void removeSongFromPlaylist(String songTitle, String artist) {
 		for (Song song : userSongList) {
+			// && song.getArtist().equals(artist)
 			if (song.getTitle().equals(songTitle)) {
 				userSongList.remove(song);
 				break;
 			}
 		}
+	}
+
+	public Song shufflePlaylist() {
+		Collections.shuffle(userSongList);
+		return new Song(userSongList.get(0));
 	}
 
 }

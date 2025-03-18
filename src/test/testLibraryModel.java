@@ -239,6 +239,9 @@ public class testLibraryModel {
 		lib.removeSongPlaylist("TEST".toLowerCase(), "LOVE.".toLowerCase(), "Kendrick Lamar".toLowerCase());
 		assertTrue(lib.searchPlaylistByName("TEST".toLowerCase()).getUserSongList().size() == 2);
 
+		// Make sure nothing is being removed.
+		this.lib.removeSongPlaylist("NOT REAL", "IDK", "WHAT");
+
 	}
 
 	@Test
@@ -296,12 +299,17 @@ public class testLibraryModel {
 
 	@Test
 	void testRemoveSongFromLibrary() {
-		this.lib.addAlbumToLibrary(ms, "19", "adele");
-		assertTrue(this.lib.getAllSongs().size() == 12);
+		this.lib.addAlbumToLibrary(ms, "old ideas", "leonard cohen");
+		this.lib.addAlbumToLibrary(ms, "waking up", "onerepublic");
 
-		this.lib.removeSongFromLibrary("tired", "adele");
-		assertFalse(this.lib.getAllSongs().size() == 12);
-		assertTrue(this.lib.getAllSongs().size() == 11);
+		assertTrue(this.lib.getAllSongs().size() == 21);
+
+		this.lib.removeSongFromLibrary("lullaby", "onerepublic");
+		assertFalse(this.lib.getAllSongs().size() == 21);
+		assertTrue(this.lib.getAllSongs().size() == 20);
+
+		this.lib.removeSongFromLibrary("Not", "reaL");
+		assertTrue(this.lib.getAllSongs().size() == 20);
 
 	}
 
@@ -314,6 +322,35 @@ public class testLibraryModel {
 		this.lib.removeAlbumFromLibrary("19");
 		assertFalse(this.lib.getAlbumList().size() == 2);
 		assertTrue(this.lib.getAlbumList().size() == 1);
+
+		this.lib.removeAlbumFromLibrary("Damn.");
+		assertTrue(this.lib.getAlbumList().size() == 1);
+
+	}
+
+	@Test
+	void testGetPlaylistToShufflePlaylist() {
+		this.lib.addAlbumToLibrary(ms, "19", "adele");
+		this.lib.addAlbumToLibrary(ms, "21", "adele");
+
+		ArrayList<Song> songList = this.ms.searchSongbyArtist("adele");
+		this.lib.createPlayList("idk");
+		for (Song song : songList) {
+			this.lib.addSongToPlaylist("idk", song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
+		}
+		Playlist pl = this.lib.searchPlaylistByName("idk");
+		assertTrue(pl.getUserSongList().size() == 24);
+
+		assertTrue(this.lib.getPlaylistToShufflePlaylist("idk") != null);
+		assertTrue(this.lib.getPlaylistToShufflePlaylist("what") == null);
+	}
+
+	@Test
+	void testGetSongFromShuffle() {
+		this.lib.addAlbumToLibrary(ms, "19", "adele");
+		this.lib.addAlbumToLibrary(ms, "21", "adele");
+
+		long seed = 12345;
 
 	}
 
