@@ -169,7 +169,7 @@ public class LibraryModel {
 	 */
 	public Playlist searchPlaylistByName(String playlistName) {
 		for (Playlist playlist : playlistLibrary) {
-			if (playlist.getPlaylistName().toLowerCase().equals(playlistName)) {
+			if (playlist.getPlaylistName().toLowerCase().equals(playlistName.toLowerCase())) {
 				return new Playlist(playlist);
 			}
 		}
@@ -182,13 +182,20 @@ public class LibraryModel {
 	public boolean addSongToLibrary(MusicStore ms, String title, String artist) {
 		for (Song song : ms.getSongsMusicStore()) { // iterate over songs in music store that are available
 			if (song.getTitle().toLowerCase().equals(title) && song.getArtist().toLowerCase().equals(artist)) {
-				if (!songLibrary.contains(song)) {
+				boolean songExists = false;
+	            for (Song songs : songLibrary) {
+	                if (songs.getTitle().equalsIgnoreCase(title) && songs.getArtist().equalsIgnoreCase(artist)) {
+	                    songExists = true;
+	                    break;
+	                }
+	            }
+				
+	            if (!songExists) {
 					songLibrary.add(song); // add song to library if not in list yet
-				}
-				return true;
-			}
+	            }
+	            return true;
 		}
-		// song was not found in music store, cannot be added to library
+		}
 		return false;
 	}
 
@@ -218,14 +225,25 @@ public class LibraryModel {
 	public void addSongToPlaylist(String playlistName, String songTitle, String artist, String albumTitle,
 			Genre genre) {
 		for (Playlist playlist : playlistLibrary) {
-			if (playlist.getPlaylistName().equals(playlistName)) {
+			if (playlist.getPlaylistName().toLowerCase().equals(playlistName.toLowerCase())) {
+				Song newSong = new Song(songTitle, artist, albumTitle, genre);
+				
 				if (!playlist.getUserSongList().contains(new Song(songTitle, artist, albumTitle, genre))) {
 					playlist.addSongToPlaylist(songTitle, artist, albumTitle, genre);
 				}
-				if (!songLibrary.contains(new Song(songTitle, artist, albumTitle, genre))) {
-					songLibrary.add(new Song(songTitle, artist, albumTitle, genre)); // add song to library if not in
-																						// list yet
-				}
+				
+				// Check if song is already in songLibrary
+	            boolean songExists = false;
+	            for (Song song : songLibrary) {
+	                if (song.getTitle().equalsIgnoreCase(songTitle) && song.getArtist().equalsIgnoreCase(artist)) {
+	                    songExists = true;
+	                    break;
+	                }
+	            }
+	            // Only add the song if it was not found
+	            if (!songExists) {
+	                songLibrary.add(newSong);
+	            }
 			}
 		}
 	}

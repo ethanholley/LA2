@@ -16,16 +16,18 @@ public class Main {
 	 * album to the library, and starts the main menu.
 	 */
 	public Main() {
-		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 		ms = pf.getMusicStore();
 		lib = new LibraryModel();
-
+		lib.createPlayList("Favorite Songs"); // create automatic playlists for fav and top rated songs
+		lib.createPlayList("Top Rated");
 		mainMenu();
 	}
 
 	private void mainMenu() {
 		System.out.println("Welcome to Your Music Aplication.\n");
 		System.out.println("Choose one of the options below in the Console\n");
+		checkGenrePlaylist();
 		System.out.println("Search Music Store     See Library     Search Library     Create Playlist\n");
 		Scanner scanner = new Scanner(System.in);
 		String execution = scanner.nextLine().toLowerCase();
@@ -75,6 +77,40 @@ public class Main {
 		System.out.println("\nPlaylist created successfully. Going back to main menu\n\n");
 		mainMenu();
 	}
+	
+	private void checkGenrePlaylist() {
+	    ArrayList<String> genreList = lib.getGenreList(); // Get all genres in the library
+
+	    for (String genre : genreList) {
+	        ArrayList<Song> songsInGenre = lib.getSongsByGenre(genre); // Get all songs in this genre
+
+	        if (songsInGenre.size() >= 10) { // Only create a playlist if at least 10 songs exist
+	            String playlistName = genre.substring(0, 1).toUpperCase() + genre.substring(1) + " Playlist"; // Format name
+	            Playlist genrePlaylist = null;
+	            
+	            // Check if the playlist already exists
+	            for (Playlist playlist : lib.getAllPlayList()) {
+	                if (playlist.getPlaylistName().equalsIgnoreCase(playlistName)) {
+	                    genrePlaylist = playlist;
+	                    break;
+	                }
+	            }
+
+	            // If the playlist does not exist, create it
+	            if (genrePlaylist == null) {
+	                lib.createPlayList(playlistName);
+	                genrePlaylist = lib.searchPlaylistByName(playlistName); // Retrieve the new playlist
+	            }
+
+	            // Add missing songs to the playlist
+	            for (Song song : songsInGenre) {
+	                if (!genrePlaylist.getUserSongList().contains(song)) {
+	                    lib.addSongToPlaylist(playlistName, song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
+	                }
+	            }
+	        }
+	    }
+	}
 
 	/*
 	 * Displays the Music Store menu.
@@ -113,7 +149,7 @@ public class Main {
 			}
 			System.out.println();
 			System.out.println("Choose one of these songs from this artist.");
-			System.out.println("You can add the song to your library, mark as a favorite, or add it to a playlist.");
+			System.out.println("You can add the song to your library, mark as a favorite, add it to a playlist, or rate the song.");
 			System.out.println("Enter the title of the song you want to add: ");
 			String songChoice = scanner.nextLine().toLowerCase();
 			Song song = null;
@@ -150,6 +186,7 @@ public class Main {
 						"Going back to main menu. Go to favorite songs in see library menu option to see changes.");
 				ms.setFavoriteOfSong(song.getArtist().toLowerCase(), song.getTitle().toLowerCase());
 				lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
+				lib.addSongToPlaylist("Favorite Songs", song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
 				mainMenu();
 			} else if (userInput.equals("add it to playlist")) {
 				ArrayList<Playlist> allPlaylists = lib.getAllPlayList();
@@ -221,6 +258,7 @@ public class Main {
 							songList.get(0).getTitle().toLowerCase());
 					lib.addSongToLibrary(ms, songList.get(0).getTitle().toLowerCase(),
 							songList.get(0).getArtist().toLowerCase());
+					lib.addSongToPlaylist("Favorite Songs", songList.get(0).getTitle(), songList.get(0).getArtist(), songList.get(0).getAlbum(), songList.get(0).getGenre());
 					mainMenu();
 				} else if (userInput.equals("add it to playlist")) {
 					ArrayList<Playlist> allPlaylists = lib.getAllPlayList();
@@ -299,6 +337,7 @@ public class Main {
 					System.out.println(
 							"Going back to main menu. Go to favorite songs in see library menu option to see changes.");
 					ms.setFavoriteOfSong(chosenSong.getArtist().toLowerCase(), chosenSong.getTitle().toLowerCase());
+					lib.addSongToPlaylist("Favorite Songs", chosenSong.getTitle(), chosenSong.getArtist(), chosenSong.getAlbum(), chosenSong.getGenre());
 					lib.addSongToLibrary(ms, chosenSong.getTitle().toLowerCase(), chosenSong.getArtist().toLowerCase());
 					mainMenu();
 
@@ -452,12 +491,17 @@ public class Main {
 					System.out.println("Song rated a 5/5. Automatically adding " + song.getTitle() + " By: "
 							+ song.getArtist() + " to favorite songs in music library.\n");
 					ms.setFavoriteOfSong(song.getArtist().toLowerCase(), song.getTitle().toLowerCase());
+					lib.addSongToPlaylist("Favorite Songs", song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
+					lib.addSongToPlaylist("Top Rated", song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
 					lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
 				} else {
 					System.out.println("Do you want to add this song to your music library? Yes or No?");
 					scanner2 = new Scanner(System.in);
 					userInput = scanner2.nextLine().toLowerCase();
 					if (userInput.equals("yes")) {
+						if (rating == rating.FOUR) {
+							lib.addSongToPlaylist("Top Rated", song.getTitle(), song.getArtist(), song.getAlbum(), song.getGenre());
+						}
 						System.out.println("Great! " + song.getTitle() + " By: " + song.getArtist()
 								+ " will be added to your library.\n");
 						lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
@@ -989,6 +1033,7 @@ public class Main {
 					}
 				}
 			}
+			System.out.println("\nReturning to Main Menu...\n\n");
 		}
 	}
 

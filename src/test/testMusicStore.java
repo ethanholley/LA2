@@ -2,6 +2,7 @@
 package test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import model.Rating;
 
 public class testMusicStore {
 
-	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 	MusicStore ms = pf.getMusicStore();
 	Album albumDamn = kendricksAlbum();
 

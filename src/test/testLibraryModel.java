@@ -20,7 +20,7 @@ import model.Song;
 public class testLibraryModel {
 
 	LibraryModel lib = new LibraryModel();
-	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 	MusicStore ms = pf.getMusicStore();
 
 	@Test
