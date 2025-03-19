@@ -18,7 +18,7 @@ public class testParseFile {
 
 	// /Users/chancekrueger/Desktop/albums
 	// /Users/ethanjholly/Desktop/LA 1/albums
-	private ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+	private ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 
 	@Test
 	void testConstructor() {

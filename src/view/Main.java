@@ -16,11 +16,13 @@ public class Main {
 	 * album to the library, and starts the main menu.
 	 */
 	public Main() {
-		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 		ms = pf.getMusicStore();
 		lib = new LibraryModel();
 		lib.createPlayList("Favorite Songs"); // create automatic playlists for fav and top rated songs
 		lib.createPlayList("Top Rated");
+		lib.createPlayList("Most Recently Played");
+		lib.createPlayList("Most Frequently Played");
 		mainMenu();
 	}
 
