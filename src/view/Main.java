@@ -4,21 +4,25 @@ package view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import model.*;
 
 public class Main {
 	private MusicStore ms;
 	private LibraryModel lib;
+	private PlayTracker playTracker;
 
 	/*
 	 * Constructor for Main class. Initializes the music store and library, adds an
 	 * album to the library, and starts the main menu.
 	 */
 	public Main() {
-		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
+		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
 		ms = pf.getMusicStore();
 		lib = new LibraryModel();
+		playTracker = new PlayTracker();
 		lib.createPlayList("Favorite Songs"); // create automatic playlists for fav and top rated songs
 		lib.createPlayList("Top Rated");
 		lib.createPlayList("Most Recently Played");
@@ -184,6 +188,9 @@ public class Main {
 				System.out.println("Great! Adding " + song.getTitle() + " to your music library.");
 				System.out.println("Going back to main menu. Go to see library to see changes.");
 				lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
+
+				lib.addAlbumToArrayList(ms, song.getAlbum().toLowerCase(), song.getArtist().toLowerCase());
+
 				mainMenu();
 			} else if (userInput.equals("mark song as favorite")) {
 				System.out.println("Great! Adding " + song.getTitle() + " as a favorite.");
@@ -193,6 +200,9 @@ public class Main {
 				lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
 				lib.addSongToPlaylist("Favorite Songs", song.getTitle(), song.getArtist(), song.getAlbum(),
 						song.getGenre());
+
+				lib.addAlbumToArrayList(ms, song.getAlbum().toLowerCase(), song.getArtist().toLowerCase());
+
 				mainMenu();
 			} else if (userInput.equals("add it to playlist")) {
 				ArrayList<Playlist> allPlaylists = lib.getAllPlayList();
@@ -219,6 +229,9 @@ public class Main {
 							lib.addSongToPlaylist(playlist.getPlaylistName().toLowerCase(), song.getTitle(),
 									song.getArtist(), song.getAlbum(), song.getGenre());
 							// mainMenu();
+
+							lib.addAlbumToArrayList(ms, song.getAlbum().toLowerCase(), song.getArtist().toLowerCase());
+
 							break;
 						}
 					}
@@ -255,6 +268,10 @@ public class Main {
 					System.out.println("Going back to main menu. Go to see library to see changes.");
 					lib.addSongToLibrary(ms, songList.get(0).getTitle().toLowerCase(),
 							songList.get(0).getArtist().toLowerCase());
+
+					lib.addAlbumToArrayList(ms, songList.get(0).getAlbum().toLowerCase(),
+							songList.get(0).getArtist().toLowerCase());
+
 					mainMenu();
 				} else if (userInput.equals("mark song as favorite")) {
 					System.out.println("Great! Adding " + songList.get(0).getTitle() + " as a favorite.");
@@ -266,6 +283,10 @@ public class Main {
 							songList.get(0).getArtist().toLowerCase());
 					lib.addSongToPlaylist("Favorite Songs", songList.get(0).getTitle(), songList.get(0).getArtist(),
 							songList.get(0).getAlbum(), songList.get(0).getGenre());
+
+					lib.addAlbumToArrayList(ms, songList.get(0).getAlbum().toLowerCase(),
+							songList.get(0).getArtist().toLowerCase());
+
 					mainMenu();
 				} else if (userInput.equals("add it to playlist")) {
 					ArrayList<Playlist> allPlaylists = lib.getAllPlayList();
@@ -291,6 +312,10 @@ public class Main {
 								lib.addSongToPlaylist(playlist.getPlaylistName().toLowerCase(),
 										songList.get(0).getTitle(), songList.get(0).getArtist(),
 										songList.get(0).getAlbum(), songList.get(0).getGenre());
+
+								lib.addAlbumToArrayList(ms, songList.get(0).getAlbum().toLowerCase(),
+										songList.get(0).getArtist().toLowerCase());
+
 								mainMenu();
 								break;
 							}
@@ -337,6 +362,10 @@ public class Main {
 					System.out.println("Great! Adding " + chosenSong.getTitle() + " to your music library.");
 					System.out.println("Going back to main menu. Go to see library to see changes.");
 					lib.addSongToLibrary(ms, chosenSong.getTitle().toLowerCase(), chosenSong.getArtist().toLowerCase());
+
+					lib.addAlbumToArrayList(ms, songList.get(0).getAlbum().toLowerCase(),
+							songList.get(0).getArtist().toLowerCase());
+
 					mainMenu();
 
 				} else if (userInput.equals("mark song as favorite")) {
@@ -347,6 +376,10 @@ public class Main {
 					lib.addSongToPlaylist("Favorite Songs", chosenSong.getTitle(), chosenSong.getArtist(),
 							chosenSong.getAlbum(), chosenSong.getGenre());
 					lib.addSongToLibrary(ms, chosenSong.getTitle().toLowerCase(), chosenSong.getArtist().toLowerCase());
+
+					lib.addAlbumToArrayList(ms, songList.get(0).getAlbum().toLowerCase(),
+							songList.get(0).getArtist().toLowerCase());
+
 					mainMenu();
 
 				} else if (userInput.equals("add it to playlist")) {
@@ -373,6 +406,10 @@ public class Main {
 								System.out.println("Going back to main menu");
 								lib.addSongToPlaylist(playlist.getPlaylistName().toLowerCase(), chosenSong.getTitle(),
 										chosenSong.getArtist(), chosenSong.getAlbum(), chosenSong.getGenre());
+
+								lib.addAlbumToArrayList(ms, songList.get(0).getAlbum().toLowerCase(),
+										songList.get(0).getArtist().toLowerCase());
+
 								mainMenu();
 								break;
 							}
@@ -504,6 +541,9 @@ public class Main {
 							song.getGenre());
 					lib.addSongToPlaylist("Top Rated", song.getTitle(), song.getArtist(), song.getAlbum(),
 							song.getGenre());
+
+					lib.addAlbumToArrayList(ms, song.getAlbum().toLowerCase(), song.getArtist().toLowerCase());
+
 				} else {
 					System.out.println("Do you want to add this song to your music library? Yes or No?");
 					scanner2 = new Scanner(System.in);
@@ -514,10 +554,15 @@ public class Main {
 							lib.addSongToPlaylist("Top Rated", song.getTitle(), song.getArtist(), song.getAlbum(),
 									song.getGenre());
 
+							lib.addAlbumToArrayList(ms, song.getAlbum().toLowerCase(), song.getArtist().toLowerCase());
+
 						} else {
 							System.out.println("Great! " + song.getTitle() + " By: " + song.getArtist()
 									+ " will be added to your library.\n");
 							lib.addSongToLibrary(ms, song.getTitle().toLowerCase(), song.getArtist().toLowerCase());
+
+							lib.addAlbumToArrayList(ms, song.getAlbum().toLowerCase(), song.getArtist().toLowerCase());
+
 						}
 					} else {
 						System.out.println("Answer was not yes, returning to main menu...\n");
@@ -625,16 +670,23 @@ public class Main {
 			mainMenu();
 		} else if (userInput.equals("albums")) {
 			ArrayList<Album> allAlbums = lib.getAlbumList();
-			if (allAlbums.size() == 0) {
+
+			HashMap<Album, ArrayList<Song>> hm = this.lib.getAlbumHash();
+
+			if (hm.size() == 0) {
 				System.out.println(
 						"You haven't added any albums to your library. Returning to main menu and navigate to add an album.\n\n");
 				mainMenu();
 			} else {
 				System.out.println("All Albums in Your Library:\n");
-				for (Album album : allAlbums) {
+				for (Map.Entry<Album, ArrayList<Song>> entry : hm.entrySet()) {
+
+					Album album = entry.getKey();
+					ArrayList<Song> songList = entry.getValue();
+
 					System.out.println(album.getAlbumName() + " By: " + album.getArtist());
 					System.out.println("	All Songs on " + album.getAlbumName() + ":");
-					for (Song song : album.getSongList()) {
+					for (Song song : songList) {
 						System.out.println("			" + song.getTitle() + " By: " + song.getArtist() + ", Album: "
 								+ song.getAlbum());
 					}
@@ -1068,7 +1120,7 @@ public class Main {
 				"Welcome to the library Search. Here is a list of the things you can search in the library:\n\n");
 		System.out.println("Please pick one options to search by.\n");
 		System.out.println("Song     Artist     Album     Genre     Remove Song from a Playlist     Remove Song\n"
-				+ "          Remove Album     Shuffle Songs     Shuffle Playlist\n");
+				+ "          Remove Album     Shuffle Songs     Shuffle Playlist     Play SOng\n");
 		Scanner scanner = new Scanner(System.in);
 		String execution = scanner.nextLine().toLowerCase();
 		boolean flag = true;
@@ -1099,6 +1151,9 @@ public class Main {
 			} else if (execution.equals("shuffle playlist")) {
 				listAllPlaylists();
 				pickPlaylistShuffle();
+			} else if (execution.equals("play song")) {
+				playSong();
+				flag = false;
 			} else {
 				System.out.println("Invalid Input, please try again.");
 				Scanner newScanner = new Scanner(System.in);
@@ -1239,19 +1294,91 @@ public class Main {
 			mainMenu();
 		} else {
 			System.out.println("All your playlists: ");
+			Map<Song, Integer> playCounts = playTracker.getPlayCounts();
 			for (Playlist playlist : allPlaylists) {
-				System.out.println(playlist.getPlaylistName());
-				System.out.println("	All Songs on " + playlist.getPlaylistName() + ":");
-				if (playlist.getUserSongList().size() == 0) {
-					System.out.println("		No songs on this playlist yet.");
-				} else {
-					for (Song song : playlist.getUserSongList()) {
+				if (playlist.getPlaylistName().equals("Most Frequently Played")) {
+					System.out.println(playlist.getPlaylistName());
+					System.out.println("        All Songs on " + playlist.getPlaylistName() + ":");
+					if (playlist.getUserSongList().isEmpty()) {
+						System.out.println("                No songs on this playlist yet.\n");
+					} else {
+						for (Song song : playTracker.getMostPlayed()) {
+							int playCount = playCounts.getOrDefault(song, 0); // Get play count from map
+							System.out.println("        	" + song.getTitle() + " By: " + song.getArtist()
+									+ ", Album: " + song.getAlbum() + " | Plays: " + playCount);
+						}
+					}
+				} else if (playlist.getPlaylistName().equals("Most Recently Played")) {
+					System.out.println(playlist.getPlaylistName());
+					System.out.println("        All Songs on " + playlist.getPlaylistName() + ":");
+					ArrayList<Song> recentSongs = playTracker.getRecentlyPlayed();
+					for (Song song : recentSongs) {
 						System.out.println("		" + song.getTitle() + " By: " + song.getArtist() + ", Album: "
 								+ song.getAlbum());
+					}
+				} else {
+					System.out.println(playlist.getPlaylistName());
+					System.out.println("	All Songs on " + playlist.getPlaylistName() + ":");
+					if (playlist.getUserSongList().size() == 0) {
+						System.out.println("		No songs on this playlist yet.\n");
+					} else {
+						for (Song song : playlist.getUserSongList()) {
+							System.out.println("		" + song.getTitle() + " By: " + song.getArtist() + ", Album: "
+									+ song.getAlbum());
+						}
 					}
 				}
 			}
 //			System.out.println("\nReturning to Main Menu...\n\n");
+		}
+	}
+
+	private void playSong() {
+		System.out.println("Here are the current songs in your Music Library:");
+		ArrayList<Song> allSongs = lib.getAllSongs();
+		for (Song song : allSongs) {
+			System.out.println(song);
+		}
+		System.out.println("What song do you want to play? Pick one from above.");
+		Scanner scanner = new Scanner(System.in);
+		String response = scanner.nextLine().toLowerCase();
+		Song selectedSong = null;
+		for (Song song : allSongs) {
+			if (song.getTitle().toLowerCase().equals(response)) {
+				selectedSong = song;
+				break;
+			}
+		}
+		if (selectedSong == null) {
+			System.out.println("\nSong not found in your library. Returning to main menu...");
+			mainMenu();
+		}
+		playTracker.playSong(selectedSong);
+		System.out.println("Now playing: " + selectedSong.getTitle() + " by " + selectedSong.getArtist());
+		updateMostRecentlyPlayed();
+		updateMostFrequentlyPlayed();
+		System.out.println("\nReturning to main menu...\n");
+		mainMenu();
+	}
+
+	private void updateMostRecentlyPlayed() {
+		// Get the list of recently played songs
+		ArrayList<Song> recentlyPlayed = playTracker.getRecentlyPlayed();
+		// Clear the "Most Recently Played" playlist first
+		lib.removeAllSongsFromPlaylist("Most Recently Played");
+		// Add songs in the reverse order, so the most recent song is at the top of the
+		// playlist
+		for (Song s : recentlyPlayed) {
+			lib.addSongToPlaylist("Most Recently Played", s.getTitle(), s.getArtist(), s.getAlbum(), s.getGenre());
+		}
+	}
+
+	private void updateMostFrequentlyPlayed() {
+		ArrayList<Song> mostPlayed = playTracker.getMostPlayed();
+		// Clear playlist first (if needed)
+		lib.removeAllSongsFromPlaylist("Most Frequently Played");
+		for (Song s : mostPlayed) {
+			lib.addSongToPlaylist("Most Frequently Played", s.getTitle(), s.getArtist(), s.getAlbum(), s.getGenre());
 		}
 	}
 

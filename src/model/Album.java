@@ -68,4 +68,21 @@ public class Album {
 		}
 	}
 
+	@Override
+	public int hashCode() {
+		int result = 17; // Start with a nonzero prime
+		result = 31 * result;
+		if (album != null) {
+			result += album.hashCode();
+		}
+		result = 31 * result;
+		if (artist != null) {
+			result += artist.hashCode();
+		}
+		result = 31 * result;
+		if (songList != null) {
+			result += songList.hashCode();
+		}
+		return result;
+	}
 }

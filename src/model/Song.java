@@ -49,7 +49,7 @@ public class Song {
 	public Rating getRating() {
 		return rating;
 	}
-	
+
 	public Genre getGenre() {
 		return this.genre;
 	}
@@ -82,7 +82,7 @@ public class Song {
 		return title + " " + artist;
 
 	}
-	
+
 	@Override
 	public boolean equals(Object o) {
 		if (o == null)
@@ -97,4 +97,10 @@ public class Song {
 					&& this.isFavorite == ((Song) o).isFavorite;
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(title, artist, album, rating, isFavorite);
+	}
+
 }

@@ -3,6 +3,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class LibraryModel {
 	private ArrayList<Song> songLibrary;
@@ -306,4 +307,43 @@ public class LibraryModel {
 		Collections.shuffle(songLibrary);
 		return this.songLibrary.get(0);
 	}
+
+	// THIS WILL ADD ONLY JUST THE ALBUM NOT ITS SONGS
+	public void addAlbumToArrayList(MusicStore ms, String albumName, String artist) {
+		for (Album album : ms.getAlbumsMusicStore()) { // iterate over albums in music store that are available
+			if (album.getAlbumName().toLowerCase().equals(albumName)
+					&& album.getArtist().toLowerCase().equals(artist)) {
+				albumLibrary.add(new Album(album));
+				break;
+			}
+		}
+	}
+
+	public HashMap<Album, ArrayList<Song>> getAlbumHash() {
+		HashMap<Album, ArrayList<Song>> hm = new HashMap<>();
+
+		for (Song song : this.songLibrary) {
+			Album album = searchAlbumTitle(song.getAlbum().toLowerCase());
+			if (hm.containsKey(album)) {
+				ArrayList<Song> songList = hm.get(album);
+				songList.add(new Song(song));
+				hm.replace(album, songList);
+			} else {
+				ArrayList<Song> songList = new ArrayList<Song>();
+				songList.add(song);
+				hm.put(album, songList);
+			}
+		}
+		return hm;
+	}
+
+	public void removeAllSongsFromPlaylist(String playlistName) {
+		for (Playlist playlist : playlistLibrary) {
+			if (playlist.getPlaylistName().toLowerCase().equals(playlistName.toLowerCase())) {
+				playlist.getUserSongList().clear();
+				return;
+			}
+		}
+	}
+
 }

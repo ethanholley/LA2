@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,7 @@ import model.Song;
 public class testLibraryModel {
 
 	LibraryModel lib = new LibraryModel();
-	ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
+	ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
 	MusicStore ms = pf.getMusicStore();
 
 	@Test
@@ -346,11 +347,18 @@ public class testLibraryModel {
 	}
 
 	@Test
-	void testGetSongFromShuffle() {
+	void testGetAlbumHash() {
 		this.lib.addAlbumToLibrary(ms, "19", "adele");
 		this.lib.addAlbumToLibrary(ms, "21", "adele");
 
-		long seed = 12345;
+		this.lib.addSongToLibrary(ms, "made for you", "onerepublic");
+		this.lib.addSongToLibrary(ms, "lullaby", "leonard cohen");
+		this.lib.addAlbumToArrayList(ms, "old ideas", "leonard cohen");
+		this.lib.addAlbumToArrayList(ms, "waking up", "onerepublic");
+
+		HashMap<Album, ArrayList<Song>> hm = this.lib.getAlbumHash();
+
+		System.out.println(hm);
 
 	}
 
