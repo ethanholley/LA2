@@ -36,7 +36,7 @@ public class Account {
 	public static void main(String[] args) {
 		Account acct = new Account("chance", "pw");
 		LibraryModel lib = new LibraryModel();
-		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
+		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 		MusicStore ms = pf.getMusicStore();
 		acct.setDataList(lib);
 

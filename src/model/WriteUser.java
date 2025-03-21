@@ -11,7 +11,7 @@ public class WriteUser {
 	// - String user name
 	// - string password
 	// - ArrayList or HashMap? -> keep track of all data (within library)
-	private static final String FILE_PATH = "/Users/chancekrueger/Desktop/AccountFolder/allAcounts.txt";
+	private static final String FILE_PATH = "/Users/ethanjholly/Desktop/AccountFolder/allAcounts.txt";
 	private Map<String, Account> users;
 
 	public WriteUser() {
@@ -71,7 +71,7 @@ public class WriteUser {
 	}
 
 	// Load Users from the Text File
-	private void loadUsersFromFile() {
+	public void loadUsersFromFile() {
 		File file = new File(FILE_PATH);
 		if (!file.exists())
 			return; // No file yet, skip loading
@@ -108,23 +108,4 @@ public class WriteUser {
 	public Set<String> getAllUsernames() {
 		return users.keySet();
 	}
-
-	public static void main(String[] args) {
-
-		WriteUser wf = new WriteUser();
-
-		wf.loadUsersFromFile();
-		System.out.println(wf.users.toString());
-		System.out.println();
-
-//		wf.addUser("chance", "pw");
-//		wf.addUser("chance2", "pw1");
-
-		System.out.println(wf.login("ethan", "pw"));
-		System.out.println(wf.login("chance", "pw"));
-		System.out.println(wf.login("chance", "pw2"));
-
-		System.out.println("HELLOWORLD");
-	}
-
 }

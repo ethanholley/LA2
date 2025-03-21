@@ -1,5 +1,6 @@
 package view;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,15 +13,19 @@ public class Main {
 	private MusicStore ms;
 	private LibraryModel lib;
 	private PlayTracker playTracker;
+	private Account user;
 
 	/*
 	 * Constructor for Main class. Initializes the music store and library, adds an
 	 * album to the library, and starts the main menu.
 	 */
-	public Main() {
+	public Main(Account user) throws FileNotFoundException {
 		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
+		this.user = user;
 		ms = pf.getMusicStore();
-		lib = new LibraryModel();
+		WriteSpecAccount wsa = new WriteSpecAccount(this.user);
+		lib = ParseUserData
+				.parseData("/Users/ethanjholly/Desktop/AccountFolder/AccountData/" + user.getUsername() + "Acct.txt");
 		playTracker = new PlayTracker();
 		lib.createPlayList("Favorite Songs"); // create automatic playlists for fav and top rated songs
 		lib.createPlayList("Top Rated");
@@ -57,9 +62,20 @@ public class Main {
 		} else if (execution.equals("logout")) {
 			System.out.println("Logging Out... Returning to Login Page.\n\n");
 			LoginPage login = new LoginPage();
-			login.start();
+			try {
+				user.setDataList(lib);
+				WriteSpecAccount writeSpec = new WriteSpecAccount(user);
+				writeSpec.writeData();
+				login.start();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else if (execution.equals("exit")) {
 			System.out.println("Exiting Music Application...\n\n");
+			user.setDataList(lib);
+			WriteSpecAccount writeSpec = new WriteSpecAccount(user);
+			writeSpec.writeData();
 			System.exit(0);
 		} else {
 			System.out.println("Invalid Input, please try again.");
@@ -1279,7 +1295,7 @@ public class Main {
 	 * Creates an instance of the Main class and starts the application.
 	 *
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		// Start the login process when the program runs
 		LoginPage loginPage = new LoginPage();
 		loginPage.start();

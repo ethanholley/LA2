@@ -19,7 +19,7 @@ public class WriteSpecAccount {
 		this.account = account;
 
 		try {
-			file = new File("/Users/chancekrueger/Desktop/AccountFolder/AccountData",
+			file = new File("/Users/ethanjholly/Desktop/AccountFolder/AccountData",
 					account.getUsername() + "Acct.txt");
 
 			if (!file.exists()) {
@@ -88,29 +88,4 @@ public class WriteSpecAccount {
 		}
 	}
 
-	public static void main(String[] args) {
-		Account acct = new Account("chance", "pw");
-		LibraryModel lib = new LibraryModel();
-		ParseFile pf = new ParseFile("/Users/chancekrueger/Desktop/albums");
-		MusicStore ms = pf.getMusicStore();
-		ms.setRatingOfSong("adele", "best for last", Rating.FOUR);
-		lib.addSongToLibrary(ms, "best for last", "adele");
-		lib.addAlbumToLibrary(ms, "19", "adele");
-		lib.addAlbumToLibrary(ms, "21", "adele");
-
-		lib.createPlayList("fav");
-		lib.createPlayList("recents");
-		lib.addSongToLibrary(ms, "politik", "coldplay");
-		lib.addAlbumToArrayList(ms, "a rush of blood to the head", "coldplay");
-		lib.addSongToPlaylist("fav", "tired", "adele", "19", Genre.POP);
-
-		acct.setDataList(lib);
-
-//		System.out.println("__________");
-//		System.out.println(lib.getSongTitles());
-
-		WriteSpecAccount aw = new WriteSpecAccount(acct);
-		aw.writeData();
-		System.out.println("HELLOWORLD");
-	}
 }

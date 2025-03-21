@@ -1,6 +1,8 @@
 package view;
 
 import model.*;
+
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class LoginPage {
@@ -12,7 +14,7 @@ public class LoginPage {
 		scanner = new Scanner(System.in);
 	}
 
-	public void start() {
+	public void start() throws FileNotFoundException {
 		System.out.println("Welcome to the Music Store!");
 		System.out.println("Please choose an option:");
 		System.out.println("1. Login");
@@ -28,25 +30,26 @@ public class LoginPage {
 		}
 	}
 
-	private void login() {
+	private void login() throws FileNotFoundException {
 		System.out.println("\n*LOGIN PAGE*:\n");
 		System.out.print("Enter your username: ");
 		String username = scanner.nextLine();
 		System.out.print("Enter your password: ");
 		String password = scanner.nextLine();
 		// Authenticate the user with WriteUser class
+		writeUser.loadUsersFromFile();
 		Account user = writeUser.login(username, password);
 		if (user != null) {
 			System.out.println("Login successful! Welcome, " + user.getUsername() + "\n\n");
 			// After successful login, proceed to main menu
-			new Main();
+			new Main(user);
 		} else {
 			System.out.println("Invalid username or password. Please try again or create an acccount.\n\n");
 			start(); // Recursively ask again
 		}
 	}
 
-	private void createAccount() {
+	private void createAccount() throws FileNotFoundException {
 		System.out.print("Enter a new username: ");
 		String username = scanner.nextLine();
 		System.out.print("Enter a new password: ");
