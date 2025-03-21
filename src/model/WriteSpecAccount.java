@@ -49,7 +49,7 @@ public class WriteSpecAccount {
 				bw.newLine();
 			}
 
-			bw.newLine();
+//			bw.newLine();
 			bw.append("ALBUM");
 			bw.newLine();
 			@SuppressWarnings("unchecked")
@@ -68,7 +68,7 @@ public class WriteSpecAccount {
 				bw.newLine();
 			}
 
-			bw.newLine();
+//			bw.newLine();
 			bw.append("PLAYLIST");
 			bw.newLine();
 			@SuppressWarnings("unchecked")
