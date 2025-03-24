@@ -10,15 +10,6 @@ import java.util.Scanner;
 public class ParseUserData {
 
 	public static LibraryModel parseData(String filename) throws FileNotFoundException {
-		/*
-		 * try { File file = new File(filename);
-		 * 
-		 * if (!file.exists()) { file.createNewFile(); }
-		 * 
-		 * } catch (IOException e) {
-		 * System.err.println("An error occurred while Accessing the file: " +
-		 * e.getMessage()); }
-		 */
 		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
 		LibraryModel lib = new LibraryModel();
 		MusicStore ms = pf.getMusicStore();
@@ -59,7 +50,6 @@ public class ParseUserData {
 					String favorite = strArray[4];
 					String rating = strArray[5];
 
-					System.out.print(artist + " " + rating);
 
 					Song song = new Song(title, artist, album, genreType);
 					if (favorite.equals("true")) {
@@ -69,7 +59,6 @@ public class ParseUserData {
 
 					Rating ratingType = Rating.valueOf(rating);
 
-					System.out.println(" " + ratingType.toString());
 					song.setRating(ratingType);
 					ms.setRatingOfSong(artist.toLowerCase(), title.toLowerCase(), ratingType);
 

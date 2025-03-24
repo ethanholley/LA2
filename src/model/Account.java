@@ -33,22 +33,4 @@ public class Account {
 		this.dataList.add(lib.getAllPlayList());
 	}
 
-	public static void main(String[] args) {
-		Account acct = new Account("chance", "pw");
-		LibraryModel lib = new LibraryModel();
-		ParseFile pf = new ParseFile("/Users/ethanjholly/Desktop/LA 1/albums");
-		MusicStore ms = pf.getMusicStore();
-		acct.setDataList(lib);
-
-		System.out.println(acct.getDataList().toString());
-
-		lib.createPlayList("FAV");
-		lib.createPlayList("RECENTS");
-		lib.addAlbumToArrayList(ms, "19", "adele");
-		lib.addSongToPlaylist("fav", "tired", "adele", "19", Genre.POP);
-
-		acct.setDataList(lib);
-		System.out.println(acct.getDataList().toString());
-	}
-
 }
